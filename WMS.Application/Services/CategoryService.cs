@@ -35,8 +35,9 @@ namespace WMS.Application.Services
                 return new BaseResponse(succeeded:false,message:"Not found!");
             try
             {
+                entity.Name = model.Name;
                 await _unitOfWork.BeginAsync();
-                _unitOfWork.CategoryRepository.Update(model);
+                _unitOfWork.CategoryRepository.Update(entity);
                 await _unitOfWork.CommitAsync();
                 return new BaseResponse();
             }

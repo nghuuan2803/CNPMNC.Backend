@@ -24,7 +24,6 @@ namespace WMS.Infrastructure.Repositories
 
         public virtual void Update(TEntity entity)
         {
-
             _db.Set<TEntity>().Update(entity);
         }
 
