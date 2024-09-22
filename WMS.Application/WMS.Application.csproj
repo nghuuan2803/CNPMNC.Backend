@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="DTOs\Requests\ProductGroup\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>

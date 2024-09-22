@@ -12,7 +12,7 @@ namespace WMS.Infrastructure.DependencyInjection
     {
         public static void AddGiaBaoDI(this IServiceCollection services, IConfiguration configuration)
         {
-
+            //brand
         }
     }
 }

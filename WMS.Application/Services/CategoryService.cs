@@ -30,7 +30,7 @@ namespace WMS.Application.Services
 
         public async Task<BaseResponse> UpdateAsync(Category model)
         {
-            var entity = _unitOfWork.CategoryRepository.FindAsync(model.Id);
+            var entity = await _unitOfWork.CategoryRepository.FindAsync(model.Id);
             if (entity == null)
                 return new BaseResponse(succeeded:false,message:"Not found!");
             try

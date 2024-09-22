@@ -42,6 +42,7 @@ namespace WMS.Infrastructure.DependencyInjection
             });
             services.AddScoped<IAccount, AccountRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<ICategoryService, CategoryService>();
         }
     }

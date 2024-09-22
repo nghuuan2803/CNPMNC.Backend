@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WMS.Application.Interfaces;
+using WMS.Application.Services;
 
 namespace WMS.Infrastructure.DependencyInjection
 {
@@ -7,7 +9,8 @@ namespace WMS.Infrastructure.DependencyInjection
     {
         public static void AddQuocBaoDI(this IServiceCollection services, IConfiguration configuration)
         {
-
+            //batch, origin , product
+            services.AddScoped<IBatchService, BatchService>();
         }
     }
 }
