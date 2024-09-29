@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using WMS.Domain.Abstracts.ProductRepo;
+﻿using WMS.Domain.Abstracts.ProductRepo;
 using WMS.Domain.Entities.ProductInfo;
 using WMS.Infrastructure.Data;
 
