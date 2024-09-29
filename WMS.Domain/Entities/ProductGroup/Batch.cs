@@ -1,22 +1,26 @@
-﻿using WMS.Domain.Entities.Organization;
+﻿using System.ComponentModel.DataAnnotations;
+using WMS.Domain.Entities.Activities;
 using WMS.Domain.Enums;
 
 namespace WMS.Domain.Entities.ProductInfo
 {
-    public class Batch :BaseEntity<string>
+    public class Batch : BaseEntity<string>
     {
-        public int ProductId { get; set; }
-        public int SuplierId { get; set; }
-        public int? Owner { get; set; }
         public int Quantity { get; set; }
-        public string OriginId { get; set; }
-        public int ErrorItemCount { get; set; }
-        public DateOnly ManufactureDate { get; set; } //NSX
+
+        public DateOnly ManufactureDate { get; set; }
+
         public BatchStatus Status { get; set; }
 
-        public Suplier? Suplier { get; set; }
-        public Product? Product { get; set; }
-        public Partner? Partner { get; set; }
-        public Origin? Origin { get; set; }
+        public int ProductId { get; set; } //FK
+
+        [StringLength(5)]
+        public string OriginId { get; set; } //FK
+
+        public int? ImportId { get; set; }
+
+        public Product Product { get; set; }
+        public Origin Origin { get; set; }
+        public Import? Import { get; set; }
     }
 }

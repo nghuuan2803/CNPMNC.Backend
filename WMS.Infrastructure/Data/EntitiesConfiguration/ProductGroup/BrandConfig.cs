@@ -9,6 +9,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
         public void Configure(EntityTypeBuilder<Brand> builder)
         {
             builder.Property(p => p.Name).HasMaxLength(100);
+            builder.HasMany(c => c.Products).WithOne(c => c.Brand).HasForeignKey(c => c.BrandId);
             string[] names = { "Sony", "Panasonic", "Sam Sung", "Apple", " Xiaomi", "Tosiba", "Aqua", "Senko" };
             var data = new List<Brand>();
             for (int i = 1; i <= names.Length; i++)

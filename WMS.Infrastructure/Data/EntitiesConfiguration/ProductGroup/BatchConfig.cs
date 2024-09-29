@@ -8,13 +8,12 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
     {
         public void Configure(EntityTypeBuilder<Batch> builder)
         {
-            builder.Property(p => p.Id).HasMaxLength(12);
-            builder.Property(p => p.OriginId).HasMaxLength(10).IsUnicode(false);
+            builder.Property(p => p.Id).HasMaxLength(40).IsUnicode(false);
+            builder.Property(p => p.OriginId).IsUnicode(false);
 
-            builder.HasOne(p => p.Suplier).WithMany().HasForeignKey(p => p.SuplierId);
-            builder.HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId);
-            builder.HasOne(p => p.Origin).WithMany().HasForeignKey(p => p.OriginId);
-            builder.HasOne(p => p.Partner).WithMany().HasForeignKey(p => p.Owner);
+            builder.HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(p => p.Origin).WithMany().HasForeignKey(p => p.OriginId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(p => p.Import).WithMany().HasForeignKey(p => p.ImportId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

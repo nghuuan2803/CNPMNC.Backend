@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WMS.Domain.Entities.Activities
+namespace WMS.Domain.Enums
 {
-    internal class ImportItem
+    public enum AgencyType
     {
+        Internal,
+        Authorized,
     }
 }

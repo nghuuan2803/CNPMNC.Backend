@@ -8,15 +8,13 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
-            builder.Property(p => p.Description).HasMaxLength(50);
-            builder.Property(p => p.Photo).HasMaxLength(250).IsUnicode(false);
+            builder.Property(p => p.Photo).IsUnicode(false);
 
             // Product -(n)-------(1)- Category || 1 category has many product <-> 1 product has only one category
-            builder.HasOne(p => p.Category).WithMany().HasForeignKey(p => p.CategoryId);
+            //builder.HasOne(p => p.Category).WithMany().HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.SetNull);
             // Product -(n)-------(1)- Brand
-            builder.HasOne(p => p.Brand).WithMany().HasForeignKey(b => b.BrandId);
-
+            //builder.HasOne(p => p.Brand).WithMany().HasForeignKey(b => b.BrandId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(c => c.Stocks).WithOne(c => c.Product).HasForeignKey(c => c.ProductId);
             string[] names =
             {
                 "Sony Bravia QLED SQ101",
@@ -32,7 +30,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
             var data = new List<Product>();
             for (int i = 1; i <= names.Length; i++)
             {
-                data.Add(new Product {Id=i, Name = names[i-1], Price = prices[i-1], CreatedOn = DateTime.Now });
+                data.Add(new Product { Id = i, Name = names[i - 1], Price = prices[i - 1], CreatedOn = DateTime.Now });
             }
             builder.HasData(data);
         }

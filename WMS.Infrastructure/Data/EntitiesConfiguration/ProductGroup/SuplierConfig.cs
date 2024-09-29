@@ -23,7 +23,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
             {
                 data.Add(new Suplier { Id = i, Name = names[i - 1] });
             }
-            builder.HasData(data);
+            //builder.HasData(data);
         }
     }
 }

@@ -1,21 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using WMS.Domain.Entities.Organization;
 
 namespace WMS.Domain.Entities.Authentication
 {
     //Tài khoản
     public class User : IdentityUser
     {
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
-        public int? EmployeeId { get; set; }
-        //public Employee? Employee { get; set; }
+        [StringLength(10)]
+        public string? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
 
-        public int? PartnerId { get; set; }
-        //public Partner Partner { get; set; }
+        public int? AgencyId { get; set; }
+        public Agency? Agency { get; set; }
     }
 }

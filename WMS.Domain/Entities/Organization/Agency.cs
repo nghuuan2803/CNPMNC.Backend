@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WMS.Domain.Enums;
 
-namespace WMS.Domain.Entities.ProductInfo
+namespace WMS.Domain.Entities.Organization
 {
-    public class Suplier : BaseEntity<int>
+    public class Agency :BaseEntity<int>
     {
         [StringLength(100)]
         public string Name { get; set; }
@@ -10,15 +11,19 @@ namespace WMS.Domain.Entities.ProductInfo
         [StringLength(150)]
         public string Address { get; set; }
 
-        [StringLength(50)]
+        [StringLength(30)]
         public string Email { get; set; }
 
-        [StringLength(15)]
+        [StringLength(10)]
         public string PhoneNumber { get; set; }
+
+        public AgencyType Type { get; set; }
+
+        public double TotalPaid { get; set; }
 
         public bool Discontinued { get; set; }
 
-        [StringLength(30)]
+        [StringLength(20)]
         public string? ContactPerson { get; set; }
     }
 }
