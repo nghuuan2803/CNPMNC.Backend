@@ -12,9 +12,10 @@ namespace WMS.Infrastructure.Repositories
         {
             _db = db;
         }
-        public virtual async Task AddAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             await _db.Set<TEntity>().AddAsync(entity);
+            return entity;
         }
 
         public virtual async Task AddMultipleAsync(IEnumerable<TEntity> entities)

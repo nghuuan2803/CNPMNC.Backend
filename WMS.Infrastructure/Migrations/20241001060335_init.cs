@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WMS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class createdb : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -156,6 +156,7 @@ namespace WMS.Infrastructure.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Discontinued = table.Column<bool>(type: "bit", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Photo = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
@@ -720,17 +721,17 @@ namespace WMS.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BrandId", "CategoryId", "CreatedBy", "CreatedOn", "Description", "Discontinued", "ModifiedBy", "ModifiedOn", "Name", "Photo", "Price", "Quantity" },
+                columns: new[] { "Id", "BrandId", "CategoryId", "CreatedBy", "CreatedOn", "Deleted", "Description", "Discontinued", "ModifiedBy", "ModifiedOn", "Name", "Photo", "Price", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4482), null, false, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
-                    { 2, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4500), null, false, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
-                    { 3, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4501), null, false, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
-                    { 4, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4502), null, false, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
-                    { 5, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4503), null, false, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
-                    { 6, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4505), null, false, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
-                    { 7, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4506), null, false, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
-                    { 8, null, null, null, new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4506), null, false, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
+                    { 1, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3310), false, null, false, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
+                    { 2, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3334), false, null, false, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
+                    { 3, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3335), false, null, false, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
+                    { 4, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3336), false, null, false, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
+                    { 5, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3337), false, null, false, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
+                    { 6, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3340), false, null, false, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
+                    { 7, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3340), false, null, false, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
+                    { 8, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3341), false, null, false, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
                 });
 
             migrationBuilder.CreateIndex(

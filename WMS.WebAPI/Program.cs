@@ -17,6 +17,7 @@ namespace WMS.WebAPI
             builder.Services.AddGiaBaoDI(builder.Configuration);
             builder.Services.AddLeHuyDI(builder.Configuration);
             builder.Services.AddQuocBaoDI(builder.Configuration);
+            builder.Services.AddAutoMapper(typeof(Program));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

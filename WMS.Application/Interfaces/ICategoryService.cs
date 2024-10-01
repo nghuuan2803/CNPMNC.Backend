@@ -1,17 +1,19 @@
-﻿using System.Linq.Expressions;
-using WMS.Application.DTOs.Responses;
-using WMS.Domain.Entities.ProductInfo;
+﻿using WMS.Domain.Entities.ProductInfo;
 
 namespace WMS.Application.Interfaces
 {
-    public interface ICategoryService : IDisposable
+    public interface ICategoryService : IBaseService<Category,int>
     {
-        Task<BaseResponse> AddAsync(Category model);
-        Task<BaseResponse> AddMultipleAsync(IEnumerable<Category> models);
-        Task<BaseResponse> UpdateAsync(Category model);
-        Task<BaseResponse> DeleteAsync(int id);
+        /*
+         * Đã kế thừa BaseService nên các phương thức bên dưới không cần định nghĩa nữa
+         */
 
-        Task<BaseResponse> FindAsync(int id);
-        Task<BaseResponse> GetListAsync(Expression<Func<Category, bool>> predicate = null!);
+        //Task<BaseResult<Category>> AddAsync(Category model);
+        //Task<BaseResult<IEnumerable<Category>>> AddMultipleAsync(IEnumerable<Category> models);
+        //Task<BaseResult> UpdateAsync(Category model);
+        //Task<BaseResult> DeleteAsync(int id);
+
+        //Task<BaseResult<Category>> FindAsync(int id);
+        //Task<BaseResult<IEnumerable<Category>>> GetListAsync(Expression<Func<Category, bool>> predicate = null!);
     }
 }

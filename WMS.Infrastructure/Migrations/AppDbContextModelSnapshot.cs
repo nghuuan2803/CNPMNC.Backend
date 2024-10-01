@@ -1126,6 +1126,9 @@ namespace WMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -1166,7 +1169,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4482),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3310),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Sony Bravia QLED SQ101",
                             Price = 10000000.0,
@@ -1175,7 +1179,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4500),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3334),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Sony Bravia OLED SN101",
                             Price = 15000000.0,
@@ -1184,7 +1189,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4501),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3335),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Sam Sung QLED SSQ113",
                             Price = 12000000.0,
@@ -1193,7 +1199,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4502),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3336),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Sam Sung OLED SS115",
                             Price = 9000000.0,
@@ -1202,7 +1209,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4503),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3337),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Điều hòa Panasonic siêu mát lạnh",
                             Price = 6000000.0,
@@ -1211,7 +1219,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4505),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3340),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Máy lạnh Tosiba buốt giá con tim",
                             Price = 5000000.0,
@@ -1220,7 +1229,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4506),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3340),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Tủ lạnh LG GG",
                             Price = 7000000.0,
@@ -1229,7 +1239,8 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2024, 9, 29, 9, 46, 48, 931, DateTimeKind.Local).AddTicks(4506),
+                            CreatedOn = new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3341),
+                            Deleted = false,
                             Discontinued = false,
                             Name = "Máy giặt AQUA ảo quá",
                             Price = 8000000.0,
