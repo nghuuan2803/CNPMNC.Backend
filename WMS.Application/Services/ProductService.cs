@@ -81,9 +81,19 @@ namespace WMS.Application.Services
         }
 
 
-        public Task<BaseResult<IEnumerable<Product>>> AddMultipleAsync(IEnumerable<Product> models)
+        public async Task<BaseResult<IEnumerable<Product>>> AddMultipleAsync(IEnumerable<Product> models)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _unitOfWork.BeginAsync();
+                await _unitOfWork.ProductRepository.AddMultipleAsync(models);
+                await _unitOfWork.CommitAsync();
+                return new BaseResult<IEnumerable<Product>>(data: models);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResult<IEnumerable<Product>>(succeeded:false, message: ex.Message);
+            }       
         }
 
         public async Task<BaseResult<Product>> FindAsync(int id)

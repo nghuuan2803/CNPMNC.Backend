@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using WMS.Application.DTOs.Requests.ProductGroup;
 using WMS.Application.DTOs.Responses;
@@ -32,7 +33,7 @@ namespace WMS.WebAPI.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create([FromBody] ProductDTO model)
         {
             var product = mapper.Map<Product>(model);
@@ -44,6 +45,20 @@ namespace WMS.WebAPI.Controllers
             }
             return BadRequest(new { message = result.Message });
         }
+
+        [HttpPost("create-multiple")]
+        public async Task<ActionResult> CreateMultiple([FromBody] List<ProductDTO> model)
+        {
+            var product = mapper.Map<List<Product>>(model);
+            var result = await service.AddMultipleAsync(product);
+            if (result.Succeeded)
+            {
+                var data = mapper.Map<List<ProductDTO>>(result.Data);
+                return Ok(new BaseResponse<List<ProductDTO>>(data, result.Message!));
+            }
+            return BadRequest(new { message = result.Message });
+        }
+
         [HttpPut("update")]
         public async Task<ActionResult> Update([FromBody] ProductDTO product)
         {
@@ -68,5 +83,40 @@ namespace WMS.WebAPI.Controllers
                 return Ok(new BaseResponse(message: result.Message!));
             return BadRequest(new { message = result.Message });
         }
+
+        [HttpGet("export-excel")]
+        public async Task<IActionResult> ExportProducts()
+        {
+            // Danh sách sản phẩm giả lập, có thể thay bằng dữ liệu từ database
+            var result = await service.GetListAsync(p => !p.Deleted);
+            var products = mapper.Map<List<ProductDTO>>(result.Data);
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Products");
+
+            // Tiêu đề cột
+            worksheet.Cell(1, 1).Value = "ID";
+            worksheet.Cell(1, 2).Value = "Tên";
+            worksheet.Cell(1, 3).Value = "Đơn giá";
+            worksheet.Cell(1, 4).Value = "Số lượng";
+
+            // Ghi dữ liệu sản phẩm vào file Excel
+            for (int i = 0; i < products.Count; i++)
+            {
+                worksheet.Cell(i + 2, 1).Value = products[i].Id;
+                worksheet.Cell(i + 2, 2).Value = products[i].Name;
+                worksheet.Cell(i + 2, 3).Value = products[i].Price;
+                worksheet.Cell(i + 2, 4).Value = products[i].Quantity;
+            }
+
+            // Tạo MemoryStream để lưu file Excel tạm thời
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            stream.Position = 0;
+
+            // Trả về file Excel
+            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "products.xlsx");
+        }
+
     }
 }
