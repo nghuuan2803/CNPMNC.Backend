@@ -13,6 +13,9 @@
     public class BaseResponse
     {
         public string? Message { get; set; }
+        public bool Succeeded { get; set; }
+        public object Data { get; set; }
+
         public BaseResponse(string message = null!)
         {
             Message = message;

@@ -40,5 +40,16 @@ namespace WMS.WebAPI
 
             app.Run();
         }
+        public IConfiguration Configuration { get; }
+
+        public Program(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddGiaBaoDI(Configuration);
+        }
     }
 }

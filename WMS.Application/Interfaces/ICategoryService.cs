@@ -15,5 +15,7 @@ namespace WMS.Application.Interfaces
 
         //Task<BaseResult<Category>> FindAsync(int id);
         //Task<BaseResult<IEnumerable<Category>>> GetListAsync(Expression<Func<Category, bool>> predicate = null!);
+
     }
+
 }

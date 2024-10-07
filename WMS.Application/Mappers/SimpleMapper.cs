@@ -9,6 +9,10 @@ namespace WMS.Application.Mappers
         {
             return new Category { Id = dto.Id, Name = dto.Name };
         }
+        public static Brand Map(this UpdateBrandDTO dto)
+        {
+            return new Brand { Id = dto.Id, Name = dto.Name };
+        }
         public static Product Map(this ProductDTO dto)
         {
             return new Product

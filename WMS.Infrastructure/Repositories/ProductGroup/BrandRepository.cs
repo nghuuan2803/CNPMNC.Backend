@@ -14,5 +14,6 @@ namespace WMS.Infrastructure.Repositories.ProductData
         public BrandRepository(AppDbContext db) : base(db)
         {
         }
+     
     }
 }
