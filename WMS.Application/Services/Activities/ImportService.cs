@@ -4,7 +4,7 @@ using WMS.Application.Interfaces;
 using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.Activities;
 
-namespace WMS.Application.Services
+namespace WMS.Application.Services.Activities
 {
     public class ImportService(IUnitOfWork _unitOfWork) : IImportService
     {

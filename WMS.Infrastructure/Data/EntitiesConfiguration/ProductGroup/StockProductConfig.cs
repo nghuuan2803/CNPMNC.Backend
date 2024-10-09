@@ -4,9 +4,9 @@ using WMS.Domain.Entities.ProductGroup;
 
 namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
 {
-    public class StockProductConfig : IEntityTypeConfiguration<StockProduct>
+    public class StockProductConfig : IEntityTypeConfiguration<Inventory>
     {
-        public void Configure(EntityTypeBuilder<StockProduct> builder)
+        public void Configure(EntityTypeBuilder<Inventory> builder)
         {
             builder.Property(p => p.WarehouseId).IsUnicode(false);
             //builder.HasOne(p=>p.Product).WithMany().HasForeignKey(p=>p.ProductId);

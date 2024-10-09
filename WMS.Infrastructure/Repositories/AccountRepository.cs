@@ -7,11 +7,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using WMS.Application.Contracts;
 using WMS.Application.DTOs.Requests.Account;
 using WMS.Application.DTOs.Responses;
 using WMS.Application.DTOs.Responses.Account;
 using WMS.Application.Extensions;
+using WMS.Application.Interfaces;
 using WMS.Domain.Entities.Authentication;
 using WMS.Infrastructure.Data;
 
@@ -22,7 +22,7 @@ namespace WMS.Infrastructure.Repositories
         UserManager<User> userManager,
         SignInManager<User> signInManager,
         IConfiguration config,
-        AppDbContext context) : IAccount
+        AppDbContext context) : IAccountService
     {
 
         private async Task<User> FindUserByEmailAsync(string email)
@@ -227,11 +227,11 @@ namespace WMS.Infrastructure.Repositories
         {
             try
             {
-                var user = await context.RefreshTokens.FirstOrDefaultAsync(t => t.UserId == userId);
-                if (user == null)
+                var rfToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.UserId == userId);
+                if (rfToken == null)
                     context.RefreshTokens.Add(new RefreshToken { UserId = userId, Token = token });
                 else
-                    user.Token = token;
+                    rfToken.Token = token;
                 await context.SaveChangesAsync();
                 return new GeneralResponse(true, null!);
             }
@@ -239,6 +239,11 @@ namespace WMS.Infrastructure.Repositories
             {
                 return new GeneralResponse(false, ex.Message);
             }
+        }
+
+        public Task LogOut()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -505,6 +505,33 @@ namespace WMS.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inventories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    WarehouseId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inventories_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventories_Warehouses_WarehouseId",
+                        column: x => x.WarehouseId,
+                        principalTable: "Warehouses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InventoryChecks",
                 columns: table => new
                 {
@@ -587,33 +614,6 @@ namespace WMS.Infrastructure.Migrations
                         principalTable: "Warehouses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StockProducts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    WarehouseId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StockProducts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StockProducts_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StockProducts_Warehouses_WarehouseId",
-                        column: x => x.WarehouseId,
-                        principalTable: "Warehouses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -724,14 +724,14 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "Id", "BrandId", "CategoryId", "CreatedBy", "CreatedOn", "Deleted", "Description", "Discontinued", "ModifiedBy", "ModifiedOn", "Name", "Photo", "Price", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3310), false, null, false, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
-                    { 2, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3334), false, null, false, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
-                    { 3, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3335), false, null, false, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
-                    { 4, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3336), false, null, false, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
-                    { 5, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3337), false, null, false, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
-                    { 6, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3340), false, null, false, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
-                    { 7, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3340), false, null, false, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
-                    { 8, null, null, null, new DateTime(2024, 10, 1, 13, 3, 35, 141, DateTimeKind.Local).AddTicks(3341), false, null, false, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
+                    { 1, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4958), false, null, false, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
+                    { 2, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4975), false, null, false, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
+                    { 3, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4977), false, null, false, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
+                    { 4, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4977), false, null, false, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
+                    { 5, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4978), false, null, false, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
+                    { 6, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4981), false, null, false, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
+                    { 7, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4982), false, null, false, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
+                    { 8, null, null, null, new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4982), false, null, false, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -868,6 +868,16 @@ namespace WMS.Infrastructure.Migrations
                 column: "WarehouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Inventories_ProductId",
+                table: "Inventories",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventories_WarehouseId",
+                table: "Inventories",
+                column: "WarehouseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InventoryChecks_ManagerId",
                 table: "InventoryChecks",
                 column: "ManagerId");
@@ -915,16 +925,6 @@ namespace WMS.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Returns_WarehouseId",
                 table: "Returns",
-                column: "WarehouseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StockProducts_ProductId",
-                table: "StockProducts",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StockProducts_WarehouseId",
-                table: "StockProducts",
                 column: "WarehouseId");
 
             migrationBuilder.CreateIndex(
@@ -1025,13 +1025,13 @@ namespace WMS.Infrastructure.Migrations
                 name: "ImportDetails");
 
             migrationBuilder.DropTable(
+                name: "Inventories");
+
+            migrationBuilder.DropTable(
                 name: "RefreshTokens");
 
             migrationBuilder.DropTable(
                 name: "ReturnDetails");
-
-            migrationBuilder.DropTable(
-                name: "StockProducts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -1049,22 +1049,22 @@ namespace WMS.Infrastructure.Migrations
                 name: "Imports");
 
             migrationBuilder.DropTable(
-                name: "Returns");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Supliers");
+                name: "Returns");
 
             migrationBuilder.DropTable(
-                name: "Exports");
+                name: "Supliers");
 
             migrationBuilder.DropTable(
                 name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Exports");
 
             migrationBuilder.DropTable(
                 name: "Agencies");

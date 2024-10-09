@@ -30,6 +30,6 @@ namespace WMS.Domain.Entities.ProductInfo
         public Category? Category { get; set; }
         public Brand? Brand { get; set; }
 
-        public ICollection<StockProduct> Stocks { get; set; }
+        public ICollection<Inventory> Stocks { get; set; }
     }
 }

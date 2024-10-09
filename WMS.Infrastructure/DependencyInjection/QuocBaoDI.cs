@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WMS.Application.Interfaces;
-using WMS.Application.Services;
+using WMS.Application.Services.ProductGroup;
 
 namespace WMS.Infrastructure.DependencyInjection
 {

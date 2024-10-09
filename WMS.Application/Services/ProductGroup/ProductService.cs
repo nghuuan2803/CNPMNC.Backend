@@ -4,15 +4,15 @@ using WMS.Application.Interfaces;
 using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.ProductInfo;
 
-namespace WMS.Application.Services
+namespace WMS.Application.Services.ProductGroup
 {
     public class ProductService(IUnitOfWork _unitOfWork) : IProductService
     {
         public async Task<BaseResult<Product>> AddAsync(Product model)
         {
-            if(model.CategoryId == 0)
+            if (model.CategoryId == 0)
                 model.CategoryId = null;
-            if(model.BrandId == 0)
+            if (model.BrandId == 0)
                 model.BrandId = null;
             try
             {
@@ -92,8 +92,8 @@ namespace WMS.Application.Services
             }
             catch (Exception ex)
             {
-                return new BaseResult<IEnumerable<Product>>(succeeded:false, message: ex.Message);
-            }       
+                return new BaseResult<IEnumerable<Product>>(succeeded: false, message: ex.Message);
+            }
         }
 
         public async Task<BaseResult<Product>> FindAsync(int id)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WMS.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using WMS.Infrastructure.Data;
 namespace WMS.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241002152143_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,38 +54,6 @@ namespace WMS.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "8255486d-98fd-43b4-ab4f-cec34ee4cb4e",
-                            Name = "admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "540f4e84-661f-4246-ab85-b7d4e68fb65c",
-                            Name = "supermanager",
-                            NormalizedName = "SUPERMANAGER"
-                        },
-                        new
-                        {
-                            Id = "6412dd30-59a2-44ae-80a7-eb410c61c515",
-                            Name = "agency",
-                            NormalizedName = "AGENCY"
-                        },
-                        new
-                        {
-                            Id = "85f135da-859f-4096-82bd-e0b69222656b",
-                            Name = "branchManager",
-                            NormalizedName = "BRANCHMANAGER"
-                        },
-                        new
-                        {
-                            Id = "d15545c5-3bec-4783-888f-5275a8ee131b",
-                            Name = "accountant",
-                            NormalizedName = "ACCOUNTANT"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -178,33 +149,6 @@ namespace WMS.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "51025ed6-3680-4dc8-a349-6ebe709a9910",
-                            RoleId = "8255486d-98fd-43b4-ab4f-cec34ee4cb4e"
-                        },
-                        new
-                        {
-                            UserId = "fb955cd6-de38-4438-9ab0-fc125fb6c141",
-                            RoleId = "540f4e84-661f-4246-ab85-b7d4e68fb65c"
-                        },
-                        new
-                        {
-                            UserId = "0b67b329-40f1-4ba9-a338-d13f389b80ce",
-                            RoleId = "85f135da-859f-4096-82bd-e0b69222656b"
-                        },
-                        new
-                        {
-                            UserId = "668ae296-631d-4be0-950b-6a9b7b3f9713",
-                            RoleId = "6412dd30-59a2-44ae-80a7-eb410c61c515"
-                        },
-                        new
-                        {
-                            UserId = "e0c03862-3d1f-4f20-b815-0258c204146a",
-                            RoleId = "d15545c5-3bec-4783-888f-5275a8ee131b"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -696,93 +640,6 @@ namespace WMS.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "51025ed6-3680-4dc8-a349-6ebe709a9910",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "93c41705-4c47-474c-9594-2bcadf193d6a",
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(5302),
-                            Email = "nghuuan2803@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "NGHUUAN2803@GMAIL.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL4TqOeyNfxTJh4zdsJ9gFx+KLbWn6pOAawv4mxTvvPQBk80FLgO/AiJJhcOvIMojw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "62bdb7c1-e879-4989-b917-93bbdd1133a5",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = "fb955cd6-de38-4438-9ab0-fc125fb6c141",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "514db0e8-ac8e-42ac-b67b-c213e6802097",
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(5414),
-                            Email = "anhuu2803@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ANHUU2803@GMAIL.COM",
-                            NormalizedUserName = "SUPERMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPdaNqezyLzY0vvSbYxCWW77FbIC+VnLsl4AJxJpIK1OvKKv1X8RauM3torAEus/Pg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "98373137-7c8b-4843-993e-e83718a12b03",
-                            TwoFactorEnabled = false,
-                            UserName = "supermanager"
-                        },
-                        new
-                        {
-                            Id = "0b67b329-40f1-4ba9-a338-d13f389b80ce",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f7a7d434-ea42-4c98-821d-a78ba1cd86a8",
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(5434),
-                            Email = "huuann28@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "HUUANN28@GMAIL.COM",
-                            NormalizedUserName = "BRANCHMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOQWZERuXi8rNsrsp6FRGvAP/xoYOLIo2OfFHXert9RC4Wvnh3X81h0yop3IK1YdOQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b278ef2b-cead-4af1-9e48-7b0529b0298f",
-                            TwoFactorEnabled = false,
-                            UserName = "branchmanager"
-                        },
-                        new
-                        {
-                            Id = "668ae296-631d-4be0-950b-6a9b7b3f9713",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b1197b27-b35d-4f04-a712-21f66e4bb191",
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(5443),
-                            Email = "an2831998@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "AN2831998@GMAIL.COM",
-                            NormalizedUserName = "AGENCY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHq/JqBYqdua48UPteBEpjaPm4IYpshvY1jTMWyIKse49KQbcVuaTS9RdJEWszh4rg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1c49ce23-d10f-406f-a287-bce94f273910",
-                            TwoFactorEnabled = false,
-                            UserName = "agency"
-                        },
-                        new
-                        {
-                            Id = "e0c03862-3d1f-4f20-b815-0258c204146a",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d626863f-277c-4d91-b5d9-9f4454be5e74",
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(5455),
-                            Email = "abcde@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ABCDE@GMAIL.COM",
-                            NormalizedUserName = "ACCOUNTANT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIEGZEEx5a8ThGcR7dtEVXe1hSNnco+y1QC9YNIi+lcaqI4rxI4N7XwIwP9u7fMjCg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a2900c84-6082-4048-8480-f69686893538",
-                            TwoFactorEnabled = false,
-                            UserName = "accountant"
-                        });
                 });
 
             modelBuilder.Entity("WMS.Domain.Entities.Locations.Warehouse", b =>
@@ -1315,7 +1172,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1590),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4958),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Sony Bravia QLED SQ101",
@@ -1325,7 +1182,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1605),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4975),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Sony Bravia OLED SN101",
@@ -1335,7 +1192,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1607),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4977),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Sam Sung QLED SSQ113",
@@ -1345,7 +1202,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1607),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4977),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Sam Sung OLED SS115",
@@ -1355,7 +1212,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1608),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4978),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Điều hòa Panasonic siêu mát lạnh",
@@ -1365,7 +1222,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1611),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4981),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Máy lạnh Tosiba buốt giá con tim",
@@ -1375,7 +1232,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1612),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4982),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Tủ lạnh LG GG",
@@ -1385,7 +1242,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2024, 10, 2, 23, 14, 14, 194, DateTimeKind.Local).AddTicks(1612),
+                            CreatedOn = new DateTime(2024, 10, 2, 22, 21, 43, 281, DateTimeKind.Local).AddTicks(4982),
                             Deleted = false,
                             Discontinued = false,
                             Name = "Máy giặt AQUA ảo quá",

@@ -4,7 +4,7 @@ using WMS.Application.Interfaces;
 using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.ProductInfo;
 
-namespace WMS.Application.Services
+namespace WMS.Application.Services.ProductGroup
 {
     public class CategoryService(IUnitOfWork _unitOfWork) : ICategoryService
     {
@@ -57,7 +57,7 @@ namespace WMS.Application.Services
                 await _unitOfWork.BeginAsync();
                 _unitOfWork.CategoryRepository.Delete(model);
                 await _unitOfWork.CommitAsync();
-                return new BaseResult(true,"Deleted successfully");
+                return new BaseResult(true, "Deleted successfully");
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WMS.Application.DTOs.Requests.ProductGroup;
 using WMS.Application.DTOs.Responses;
 using WMS.Application.Interfaces;
@@ -9,6 +10,7 @@ namespace WMS.API.Controllers.ProductGroup
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin,supermanager")]
     public class CategoryController(ICategoryService service) : ControllerBase
     {
         [HttpPost]

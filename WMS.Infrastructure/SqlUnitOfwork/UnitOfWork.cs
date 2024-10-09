@@ -1,8 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using WMS.Domain.Abstracts;
+using WMS.Domain.Abstracts.Activities;
+using WMS.Domain.Abstracts.Locations;
+using WMS.Domain.Abstracts.Organization;
 using WMS.Domain.Abstracts.ProductGroup;
 using WMS.Domain.Abstracts.ProductRepo;
 using WMS.Infrastructure.Data;
+using WMS.Infrastructure.Repositories.Organization;
 using WMS.Infrastructure.Repositories.ProductData;
 using WMS.Infrastructure.Repositories.ProductGroup;
 
@@ -17,6 +21,19 @@ namespace WMS.Infrastructure.SqlsvUnitOfwork
         public IBrandRepository BrandRepository { get; set; } = new BrandRepository(_db);
         public IBatchRepository BatchRepository { get; set; } = new BatchRepository(_db);
         public IOriginRepository OriginRepository { get; set; } = new OriginRepository(_db);
+        public IInventoryRepository InventoryRepository { get; set; } = new InventoryRepository(_db);
+        public IEmployeeRepository EmployeeRepository { get; set; } = new EmployeeRepository(_db);
+        public IAgencyRepository AgencyRepository { get; set; }
+        public ISuplierRepository SuplierRepository { get; set; }
+        public IWarehouseRepository WarehouseRepository { get; set; }
+        public IInventoryCheckRepository InventoryCheckRepository { get; set; }
+        public ICheckDetailRepository CheckDetailRepository { get; set; }
+        public IImportRepository ImportRepository { get; set; }
+        public IImportDetailRepository ImportDetailRepository { get; set; }
+        public IExportRepository ExportRepository { get; set; }
+        public IExportDetailRepository ExportDetailRepository { get; set; }
+        public IReturnRepository ReturnRepository { get; set; }
+        public IReturnDetailRepository ReturnDetailRepository { get; set; }
 
         public async Task BeginAsync()
         {

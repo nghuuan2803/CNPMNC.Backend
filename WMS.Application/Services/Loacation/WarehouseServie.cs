@@ -2,19 +2,18 @@
 using WMS.Application.DTOs.Results;
 using WMS.Application.Interfaces;
 using WMS.Domain.Abstracts;
-using WMS.Domain.Entities.Organization;
-using WMS.Domain.Entities.ProductInfo;
+using WMS.Domain.Entities.Locations;
 
-namespace WMS.Application.Services
+namespace WMS.Application.Services.Loacation
 {
-    public class EmployeeService(IUnitOfWork _unitOfWork) : IEmployeeService
+    public class WarehouseServie(IUnitOfWork _unitOfWork) : IWarehouseSevice
     {
-        public Task<BaseResult<Employee>> AddAsync(Employee model)
+        public Task<BaseResult<Warehouse>> AddAsync(Warehouse model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult<IEnumerable<Employee>>> AddMultipleAsync(IEnumerable<Employee> models)
+        public Task<BaseResult<IEnumerable<Warehouse>>> AddMultipleAsync(IEnumerable<Warehouse> models)
         {
             throw new NotImplementedException();
         }
@@ -29,17 +28,17 @@ namespace WMS.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult<Employee>> FindAsync(string id)
+        public Task<BaseResult<Warehouse>> FindAsync(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult<IEnumerable<Employee>>> GetListAsync(Expression<Func<Employee, bool>> predicate = null)
+        public Task<BaseResult<IEnumerable<Warehouse>>> GetListAsync(Expression<Func<Warehouse, bool>> predicate = null)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult> UpdateAsync(Employee model)
+        public Task<BaseResult> UpdateAsync(Warehouse model)
         {
             throw new NotImplementedException();
         }

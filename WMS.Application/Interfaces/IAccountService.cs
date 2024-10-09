@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WMS.Application.DTOs.Requests.Account;
+﻿using WMS.Application.DTOs.Requests.Account;
 using WMS.Application.DTOs.Responses;
 using WMS.Application.DTOs.Responses.Account;
 
-namespace WMS.Application.Contracts
+namespace WMS.Application.Interfaces
 {
-    public interface IAccount
+    public interface IAccountService
     {
         Task CreateAdminAsync();
         Task<GeneralResponse> CreateAccountAsync(CreateAccountDTO model);
@@ -19,5 +14,6 @@ namespace WMS.Application.Contracts
         Task<IEnumerable<GetUsersWithRoleDTO>> GetUsersWithRolesAsync();
         Task<GeneralResponse> ChangeUserRoleAsync(ChangeUserRoleDTO model);
         Task<LoginResponse> RefreshTokenAsync(RefreshTokenDTO model);
+        Task LogOut();
     }
 }

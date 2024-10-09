@@ -6,7 +6,6 @@ namespace WMS.Domain.Entities.Organization
 {
     public class Employee : BaseEntity<string>
     {
-
         [StringLength(15)]
         public string FirstName { get; set; }
 

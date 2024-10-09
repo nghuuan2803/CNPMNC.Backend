@@ -5,9 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using WMS.Application.Contracts;
 using WMS.Application.Interfaces;
-using WMS.Application.Services;
+using WMS.Application.Services.ProductGroup;
 using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.Authentication;
 using WMS.Infrastructure.Data;
@@ -40,7 +39,7 @@ namespace WMS.Infrastructure.DependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]!))
                 };
             });
-            services.AddScoped<IAccount, AccountRepository>();
+            services.AddScoped<IAccountService, AccountRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ICategoryService, CategoryService>();

@@ -4,7 +4,7 @@ using WMS.Domain.Entities.ProductInfo;
 
 namespace WMS.Domain.Entities.ProductGroup
 {
-    public class StockProduct
+    public class Inventory
     {
         [Key]
         public int Id { get; set; }

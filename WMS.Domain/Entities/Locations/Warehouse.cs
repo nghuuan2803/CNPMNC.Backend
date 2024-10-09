@@ -28,6 +28,6 @@ namespace WMS.Domain.Entities.Locations
 
         public Employee? Manager { get; set; }
 
-        public ICollection<StockProduct>? Stocks { get; set; }
+        public ICollection<Inventory>? Stocks { get; set; }
     }
 }
