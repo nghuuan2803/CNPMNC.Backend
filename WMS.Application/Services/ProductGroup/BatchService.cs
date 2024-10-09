@@ -17,7 +17,7 @@ namespace WMS.Application.Services.ProductGroup
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult> DeleteAsync(int id)
+        public Task<BaseResult> DeleteAsync(string id)
         {
             throw new NotImplementedException();
         }

@@ -6,6 +6,8 @@ using WMS.Domain.Abstracts.Organization;
 using WMS.Domain.Abstracts.ProductGroup;
 using WMS.Domain.Abstracts.ProductRepo;
 using WMS.Infrastructure.Data;
+using WMS.Infrastructure.Repositories.Activities;
+using WMS.Infrastructure.Repositories.Loaction;
 using WMS.Infrastructure.Repositories.Organization;
 using WMS.Infrastructure.Repositories.ProductData;
 using WMS.Infrastructure.Repositories.ProductGroup;
@@ -23,17 +25,17 @@ namespace WMS.Infrastructure.SqlsvUnitOfwork
         public IOriginRepository OriginRepository { get; set; } = new OriginRepository(_db);
         public IInventoryRepository InventoryRepository { get; set; } = new InventoryRepository(_db);
         public IEmployeeRepository EmployeeRepository { get; set; } = new EmployeeRepository(_db);
-        public IAgencyRepository AgencyRepository { get; set; }
-        public ISuplierRepository SuplierRepository { get; set; }
-        public IWarehouseRepository WarehouseRepository { get; set; }
-        public IInventoryCheckRepository InventoryCheckRepository { get; set; }
-        public ICheckDetailRepository CheckDetailRepository { get; set; }
-        public IImportRepository ImportRepository { get; set; }
-        public IImportDetailRepository ImportDetailRepository { get; set; }
-        public IExportRepository ExportRepository { get; set; }
-        public IExportDetailRepository ExportDetailRepository { get; set; }
-        public IReturnRepository ReturnRepository { get; set; }
-        public IReturnDetailRepository ReturnDetailRepository { get; set; }
+        public IAgencyRepository AgencyRepository { get; set; } = new AgencyRepository(_db);
+        public ISuplierRepository SuplierRepository { get; set; } = new SuplierRepository(_db);
+        public IWarehouseRepository WarehouseRepository { get; set; } = new WarehouseRepository(_db);
+        public IInventoryCheckRepository InventoryCheckRepository { get; set; } = new InventoryCheckRepository(_db);
+        public ICheckDetailRepository CheckDetailRepository { get; set; } = new CheckDetailRepository(_db);
+        public IImportRepository ImportRepository { get; set; } = new ImportRepository(_db);
+        public IImportDetailRepository ImportDetailRepository { get; set; } = new ImportDetailRepository(_db);
+        public IExportRepository ExportRepository { get; set; } = new ExportRepository(_db);
+        public IExportDetailRepository ExportDetailRepository { get; set; } = new ExportDetailRepository(_db);
+        public IReturnRepository ReturnRepository { get; set; } = new ReturnRepository(_db);
+        public IReturnDetailRepository ReturnDetailRepository { get; set; } = new ReturnDetailRepository(_db);
 
         public async Task BeginAsync()
         {

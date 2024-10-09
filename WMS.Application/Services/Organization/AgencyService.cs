@@ -9,9 +9,19 @@ namespace WMS.Application.Services.Organization
 {
     public class AgencyService(IUnitOfWork _unitOfWork) : IAgencyService
     {
-        public Task<BaseResult<Agency>> AddAsync(Agency model)
+        public async Task<BaseResult<Agency>> AddAsync(Agency model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                model.CreatedOn = DateTime.Now;
+                await _unitOfWork.AgencyRepository.AddAsync(model);
+                await _unitOfWork.SaveAsync();
+                return new BaseResult<Agency>(data: model);
+            }
+            catch
+            {
+                return new BaseResult<Agency>(succeeded: false);
+            }
         }
 
         public Task<BaseResult<IEnumerable<Agency>>> AddMultipleAsync(IEnumerable<Agency> models)
@@ -19,29 +29,53 @@ namespace WMS.Application.Services.Organization
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult> DeleteAsync(int id)
+        public async Task<BaseResult> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var model = await _unitOfWork.AgencyRepository.FindAsync(id);
+                _unitOfWork.AgencyRepository.Delete(model);
+                await _unitOfWork.SaveAsync();
+                return new BaseResult();
+            }
+            catch
+            {
+                return new BaseResult(succeeded: false);
+            }
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Dispose();
         }
 
-        public Task<BaseResult<Agency>> FindAsync(int id)
+        public async Task<BaseResult<Agency>> FindAsync(int id)
         {
-            throw new NotImplementedException();
+            var model = await _unitOfWork.AgencyRepository.FindAsync(id);
+            if (model == null)
+                return new BaseResult<Agency>(succeeded: false);
+            return new BaseResult<Agency>(model);
         }
 
-        public Task<BaseResult<IEnumerable<Agency>>> GetListAsync(Expression<Func<Agency, bool>> predicate = null)
+        public async Task<BaseResult<IEnumerable<Agency>>> GetListAsync(Expression<Func<Agency, bool>> predicate = null!)
         {
-            throw new NotImplementedException();
+            var models = await _unitOfWork.AgencyRepository.GetListAsync(predicate);
+            return new BaseResult<IEnumerable<Agency>>(models);
         }
 
-        public Task<BaseResult> UpdateAsync(Agency model)
+        public async Task<BaseResult> UpdateAsync(Agency model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                model.CreatedOn = DateTime.Now;
+                _unitOfWork.AgencyRepository.Update(model);
+                await _unitOfWork.SaveAsync();
+                return new BaseResult();
+            }
+            catch
+            {
+                return new BaseResult(succeeded: false);
+            }
         }
     }
 }

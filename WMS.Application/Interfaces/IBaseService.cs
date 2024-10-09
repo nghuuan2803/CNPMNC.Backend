@@ -10,7 +10,7 @@ namespace WMS.Application.Interfaces
         Task<BaseResult<TEntity>> AddAsync(TEntity model);
         Task<BaseResult<IEnumerable<TEntity>>> AddMultipleAsync(IEnumerable<TEntity> models);
         Task<BaseResult> UpdateAsync(TEntity model);
-        Task<BaseResult> DeleteAsync(int id);
+        Task<BaseResult> DeleteAsync(TKey id);
 
         Task<BaseResult<TEntity>> FindAsync(TKey id);
         Task<BaseResult<IEnumerable<TEntity>>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null!);

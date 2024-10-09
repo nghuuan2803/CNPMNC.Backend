@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WMS.Application.Interfaces;
+using WMS.Application.Services.Loacation;
+using WMS.Application.Services.Organization;
 using WMS.Application.Services.ProductGroup;
 using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.Authentication;
@@ -44,6 +46,9 @@ namespace WMS.Infrastructure.DependencyInjection
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IWarehouseSevice, WarehouseServie>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IAgencyService, AgencyService>();
         }
     }
 }
