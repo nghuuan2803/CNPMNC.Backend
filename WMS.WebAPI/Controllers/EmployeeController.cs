@@ -33,8 +33,8 @@ namespace WMS.WebAPI.Controllers
                 return Ok(new BaseResponse(result.Message!));
             return BadRequest(new BaseResponse(result.Message!));
         }
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] string id)
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete(string id)
         {
             var result = await service.DeleteAsync(id);
             if (result.Succeeded)

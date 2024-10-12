@@ -10,7 +10,7 @@ namespace WMS.API.Controllers.ProductGroup
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin,supermanager")]
+    //[Authorize(Roles = "admin,supermanager")]
     public class CategoryController(ICategoryService service) : ControllerBase
     {
         [HttpPost]

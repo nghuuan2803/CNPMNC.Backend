@@ -65,7 +65,7 @@ namespace WMS.WebAPI
 
             app.UseCors(o =>
             {
-                o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();               
             });
 
 

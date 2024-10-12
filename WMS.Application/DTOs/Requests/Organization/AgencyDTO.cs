@@ -5,16 +5,17 @@ namespace WMS.Application.DTOs.Requests.Organization
 {
     public class AgencyDTO
     {
-        [StringLength(100)]
+        public int Id { get; set; }
+        //[StringLength(100)]
         public string Name { get; set; }
 
-        [StringLength(150)]
+        //[StringLength(150)]
         public string Address { get; set; }
 
-        [StringLength(30)]
+        //[StringLength(30)]
         public string Email { get; set; }
 
-        [StringLength(10)]
+        //[StringLength(10)]
         public string PhoneNumber { get; set; }
 
         public AgencyType Type { get; set; }
@@ -23,7 +24,7 @@ namespace WMS.Application.DTOs.Requests.Organization
 
         public bool Discontinued { get; set; }
 
-        [StringLength(20)]
+        //[StringLength(20)]
         public string? ContactPerson { get; set; }
     }
 }

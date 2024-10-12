@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ClosedXML.Excel;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WMS.Application.DTOs.Requests.ProductGroup;
 using WMS.Application.DTOs.Responses;
@@ -12,7 +11,7 @@ namespace WMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="admin")]
+    //[Authorize(Roles ="admin")]
     public class ProductController(IProductService service, IMapper mapper) : ControllerBase
     {
         [HttpGet("{id}")]
