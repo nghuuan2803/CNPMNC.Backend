@@ -21,9 +21,9 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
             var data = new List<Suplier>();
             for (int i = 1; i <= names.Length; i++)
             {
-                data.Add(new Suplier { Id = i, Name = names[i - 1] });
+                data.Add(new Suplier { Id = i, Name = names[i - 1], Address="",PhoneNumber="",Email="" });
             }
-            //builder.HasData(data);
+            builder.HasData(data);
         }
     }
 }

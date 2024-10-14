@@ -4,5 +4,6 @@ namespace WMS.Domain.Abstracts.Activities
 {
     public interface IImportDetailRepository : IBaseRepository<ImportDetail,int>
     {
+        void UpdateMultiple(IEnumerable<ImportDetail> items);
     }
 }

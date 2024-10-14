@@ -12,5 +12,7 @@ namespace WMS.Domain.Abstracts
         Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null!);
         Task<TEntity> FindAsync(TKey id);
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
+
+        void Detach(TEntity entity);
     }
 }

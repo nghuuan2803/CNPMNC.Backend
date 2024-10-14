@@ -9,5 +9,10 @@ namespace WMS.Infrastructure.Repositories.Activities
         public ImportDetailRepository(AppDbContext db) : base(db)
         {
         }
+
+        public void UpdateMultiple(IEnumerable<ImportDetail> items)
+        {
+            _db.UpdateRange(items);
+        }
     }
 }

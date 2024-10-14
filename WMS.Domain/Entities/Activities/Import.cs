@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using WMS.Domain.Entities.Locations;
 using WMS.Domain.Entities.Organization;
-using WMS.Domain.Entities.ProductGroup;
 using WMS.Domain.Entities.ProductInfo;
 using WMS.Domain.Enums;
 

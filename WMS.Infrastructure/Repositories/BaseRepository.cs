@@ -49,5 +49,10 @@ namespace WMS.Infrastructure.Repositories
                 return await _db.Set<TEntity>().ToListAsync();
             return await _db.Set<TEntity>().Where(predicate).ToListAsync();
         }
+
+        public void Detach(TEntity entity)
+        {
+            _db.Entry(entity).State = EntityState.Detached;
+        }
     }
 }
