@@ -6,6 +6,7 @@ namespace WMS.Domain.Entities.Activities
 {
     public class Export : BaseEntity<int>
     {
+        //public string? OrderId { get; set; }
 
         public double Amount { get; set; }
 

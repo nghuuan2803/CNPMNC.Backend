@@ -18,7 +18,7 @@ namespace WMS.Domain.Entities.Activities
         public int ProductId { get; set; } //FK
 
         [StringLength(5)]
-        public string WarehouseId { get; set; } //FK
+        public string? WarehouseId { get; set; } //FK
 
         public Export Export { get; set; }
 

@@ -1,6 +1,4 @@
-﻿using WMS.Domain.Entities.Activities;
-using WMS.Domain.Entities.ProductInfo;
-using WMS.Domain.Enums;
+﻿using WMS.Domain.Enums;
 
 namespace WMS.Application.DTOs.Responses
 {
@@ -34,6 +32,5 @@ namespace WMS.Application.DTOs.Responses
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public string? Photo { get; set; }
-
     }
 }

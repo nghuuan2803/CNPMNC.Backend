@@ -6,6 +6,7 @@
         Pending,
         Accepted,
         Paid,
+        Delivery,
         Completed,
         Canceled
     }

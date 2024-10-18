@@ -15,16 +15,15 @@ namespace WMS.Application.Services.Activities
         {
             try
             {
-                if (!model.Items.Any())
+                if (model.Items.Count == 0)
                 {
                     throw new Exception("Đơn nhập không có sản phẩm");
                 }
                 model.CreatedOn = DateTime.Now;
                 model.Status = Domain.Enums.ImportStatus.Pending;
-                model.Amount = model.Items.Sum(p=>p.UnitPrice*p.Quantity);
+                model.Amount = model.Items.Sum(p => p.UnitPrice * p.Quantity);
                 await _unitOfWork.BeginAsync();
                 await _unitOfWork.ImportRepository.AddAsync(model);
-                await _unitOfWork.SaveAsync();
                 await _unitOfWork.CommitAsync();
                 return new BaseResult<Import>(model);
             }
