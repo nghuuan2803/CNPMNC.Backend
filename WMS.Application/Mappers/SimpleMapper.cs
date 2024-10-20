@@ -5,7 +5,7 @@ namespace WMS.Application.Mappers
 {
     public static class SimpleMapper
     {
-        public static Category Map(this UpdateCategoryDTO dto)
+        public static Category Map(this CategoryDTO dto)
         {
             return new Category { Id = dto.Id, Name = dto.Name };
         }

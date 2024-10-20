@@ -12,6 +12,8 @@ namespace WMS.Domain.Entities.ProductInfo
         [Range(0, 9000000000)]
         public double Price { get; set; }
 
+        //public double ImportPrice { get; set; }
+
         public int Quantity { get; set; }
 
         public bool Discontinued { get; set; }

@@ -9,7 +9,7 @@ namespace WMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WarehouseController(IWarehouseSevice service, IMapper _mapper) : ControllerBase
+    public class WarehouseController(IWarehouseService service, IMapper _mapper) : ControllerBase
     {
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] WarehouseDTO dto)

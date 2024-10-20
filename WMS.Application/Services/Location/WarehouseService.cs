@@ -7,7 +7,7 @@ using WMS.Domain.Entities.Organization;
 
 namespace WMS.Application.Services.Loacation
 {
-    public class WarehouseServie(IUnitOfWork _unitOfWork) : IWarehouseSevice
+    public class WarehouseService(IUnitOfWork _unitOfWork) : IWarehouseService
     {
         public async Task<BaseResult<Warehouse>> AddAsync(Warehouse model)
         {

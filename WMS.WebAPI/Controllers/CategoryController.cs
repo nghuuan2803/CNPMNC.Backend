@@ -24,7 +24,7 @@ namespace WMS.API.Controllers.ProductGroup
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateCategoryDTO model)
+        public async Task<IActionResult> Update([FromBody] CategoryDTO model)
         {
             var result = await service.UpdateAsync(model.Map());
             if (result.Succeeded)

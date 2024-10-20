@@ -2,7 +2,7 @@
 
 namespace WMS.Application.Interfaces
 {
-    public interface IWarehouseSevice : IBaseService<Warehouse,string>
+    public interface IWarehouseService : IBaseService<Warehouse,string>
     {
 
     }

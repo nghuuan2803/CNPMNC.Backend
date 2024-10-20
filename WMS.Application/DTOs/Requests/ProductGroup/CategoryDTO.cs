@@ -2,7 +2,7 @@
 
 namespace WMS.Application.DTOs.Requests.ProductGroup
 {
-    public class UpdateCategoryDTO
+    public class CategoryDTO
     {
         public int Id { get; set; }
         [StringLength(20)]
