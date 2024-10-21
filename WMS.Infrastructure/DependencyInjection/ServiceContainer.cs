@@ -52,6 +52,7 @@ namespace WMS.Infrastructure.DependencyInjection
             services.AddScoped<IAgencyService, AgencyService>();
             services.AddScoped<IImportService, ImportService>();
             services.AddScoped<IExportService, ExportService>();
+            services.AddScoped<ISuplierService, SuplierService>();
         }
     }
 }

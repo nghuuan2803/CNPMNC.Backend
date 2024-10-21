@@ -1,6 +1,9 @@
-﻿namespace WMS.Application.Interfaces
+﻿using WMS.Domain.Entities.ProductInfo;
+
+namespace WMS.Application.Interfaces
 {
-    public interface ISuplierService
+    public interface ISuplierService: IBaseService<Suplier,int>
     {
+
     }
 }

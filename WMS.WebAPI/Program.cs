@@ -1,5 +1,7 @@
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.OpenApi.Models;
 using WMS.Infrastructure.DependencyInjection;
+using WMS.WebAPI.Controllers;
 namespace WMS.WebAPI
 {
     public class Program
@@ -45,7 +47,8 @@ namespace WMS.WebAPI
             builder.Services.AddLeHuyDI(builder.Configuration);
             builder.Services.AddQuocBaoDI(builder.Configuration);
             builder.Services.AddAutoMapper(typeof(Program));
-            
+            builder.Services.AddHttpClient<ProductController>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
