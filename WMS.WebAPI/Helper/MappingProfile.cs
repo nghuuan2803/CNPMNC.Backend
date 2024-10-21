@@ -23,6 +23,7 @@ namespace WMS.WebAPI.Helper
             CreateMap<Employee, EmployeeDTO>().ReverseMap();
             CreateMap<Warehouse, WarehouseDTO>().ReverseMap();
             CreateMap<Suplier, SuplierDTO>().ReverseMap();
+            CreateMap<Brand, BrandDTO>().ReverseMap();
 
             CreateMap<Import, ImportDTO>()
             .ForMember(dest => dest.WarehouseName, opt => opt.MapFrom(src => src.Warehouse.Name))

@@ -9,21 +9,22 @@ namespace WMS.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SuplierController(ISuplierService service, IMapper mapper) : ControllerBase
+    public class BrandController(IBrandService service, IMapper mapper) : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] SuplierDTO model)
+        public async Task<IActionResult> Add([FromBody] string name)
         {
-            var result = await service.AddAsync(mapper.Map<Suplier>(model));
+            var model = new Brand { Name = name };
+            var result = await service.AddAsync(model);
             if (result.Succeeded)
-                return Ok(new BaseResponse<SuplierDTO>(mapper.Map<SuplierDTO>(result.Data), result.Message!));
+                return Ok(new BaseResponse<Brand>(result.Data!, result.Message!));
             return BadRequest(result.Message);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] SuplierDTO model)
+        public async Task<IActionResult> Update([FromBody] BrandDTO model)
         {
-            var result = await service.UpdateAsync(mapper.Map<Suplier>(model));
+            var result = await service.UpdateAsync(mapper.Map<Brand>(model));
             if (result.Succeeded)
                 return Ok(new BaseResponse(result.Message!));
             return BadRequest(result.Message);
@@ -43,8 +44,8 @@ namespace WMS.WebAPI.Controllers
             var result = await service.GetListAsync();
             if (result.Succeeded)
             {
-                var data = mapper.Map<List<SuplierDTO>>(result.Data);
-                return Ok(new BaseResponse<IEnumerable<SuplierDTO>>(data, result.Message!));
+                var data = mapper.Map<List<BrandDTO>>(result.Data);
+                return Ok(new BaseResponse<IEnumerable<BrandDTO>>(data, result.Message!));
             }
             return BadRequest(result.Message);
         }
@@ -55,7 +56,7 @@ namespace WMS.WebAPI.Controllers
             var result = await service.FindAsync(id);
             if (result.Succeeded)
             {
-                return Ok(new BaseResponse<Suplier>(result.Data!, result.Message!));
+                return Ok(new BaseResponse<Brand>(result.Data!, result.Message!));
             }
             return BadRequest(result.Message);
         }
