@@ -21,7 +21,7 @@ namespace WMS.Application.DTOs.Requests.Activities
 
         public int AgencyId { get; set; }
 
-        public string AgencyName { get; set; }
+        public string? AgencyName { get; set; }
 
         //[StringLength(10)]
         public string ManagerId { get; set; }

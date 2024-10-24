@@ -4,8 +4,9 @@
     {
         Pending,
         Paid,
-        Delivery,
         Completed,
+        OrderCanceled,
+        OrderRefuse,
         Canceled
     }
 }

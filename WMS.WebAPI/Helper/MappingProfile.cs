@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WMS.Application.DTOs.Requests;
 using WMS.Application.DTOs.Requests.Activities;
 using WMS.Application.DTOs.Requests.Loacations;
 using WMS.Application.DTOs.Requests.Organization;
@@ -71,6 +72,19 @@ namespace WMS.WebAPI.Helper
                 .ForMember(dest => dest.ExportId, opt => opt.MapFrom(src => src.ExportId))     
                 .ForMember(dest => dest.Product, opt => opt.Ignore())                        // Bỏ qua Product để tránh map không mong muốn
                 .ForMember(dest => dest.Export, opt => opt.Ignore());
+
+            // Map từ OrderRequest sang Export
+            CreateMap<OrderRequest, Export>()
+                .ForMember(dest => dest.Note, opt => opt.MapFrom(src => src.Note))
+                .ForMember(dest => dest.AgencyId, opt => opt.MapFrom(src => src.AgencyId))
+                .ForMember(dest => dest.ManagerId, opt => opt.MapFrom(src => src.ManagerId))
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items));
+
+            // Map từ AddOrderItem sang ExportDetail
+            CreateMap<AddOrderItem, ExportDetail>()
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
+
         }
     }
 }

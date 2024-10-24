@@ -55,31 +55,31 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ea543299-c741-48ad-a7f3-3a58b635e183",
+                            Id = "17cee6b0-f1b3-479a-a896-146ae598c50b",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e0b6f1f9-1497-484a-90e9-0d5c062c9cd8",
+                            Id = "83601cc7-c0de-4593-a48d-20a628eae27b",
                             Name = "supermanager",
                             NormalizedName = "SUPERMANAGER"
                         },
                         new
                         {
-                            Id = "a15f2296-5e32-4be7-899e-efd1e157544c",
+                            Id = "cdbc33d2-32e8-4d77-8e49-4639db15236e",
                             Name = "agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
-                            Id = "4ccff108-bdd6-4fa7-a6e8-8d623a9c8bad",
+                            Id = "67720c0f-f08f-4d03-bb3f-56533aed370e",
                             Name = "branchManager",
                             NormalizedName = "BRANCHMANAGER"
                         },
                         new
                         {
-                            Id = "f62246ee-4d5b-4834-bf1b-961e6032de1b",
+                            Id = "9f91751c-b626-48ac-aa0d-5f2b727f5457",
                             Name = "accountant",
                             NormalizedName = "ACCOUNTANT"
                         });
@@ -182,28 +182,28 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "5ad39a0b-0377-47dd-98ef-f53c56e07c4d",
-                            RoleId = "ea543299-c741-48ad-a7f3-3a58b635e183"
+                            UserId = "3a99b1a0-447c-4dcc-8ee6-e4cac9d607f9",
+                            RoleId = "17cee6b0-f1b3-479a-a896-146ae598c50b"
                         },
                         new
                         {
-                            UserId = "9672afb8-f6db-4c85-95c0-b1384e44df2f",
-                            RoleId = "e0b6f1f9-1497-484a-90e9-0d5c062c9cd8"
+                            UserId = "4963eb73-4dcd-4a7c-8e3d-daedc4f1d32a",
+                            RoleId = "83601cc7-c0de-4593-a48d-20a628eae27b"
                         },
                         new
                         {
-                            UserId = "3c070b4b-2939-4047-8704-d75761a102d5",
-                            RoleId = "4ccff108-bdd6-4fa7-a6e8-8d623a9c8bad"
+                            UserId = "dcc8e952-2c5f-4283-a6a5-e091125f0a6c",
+                            RoleId = "67720c0f-f08f-4d03-bb3f-56533aed370e"
                         },
                         new
                         {
-                            UserId = "f679a72f-2475-4fdc-a1ce-f61f771f596d",
-                            RoleId = "a15f2296-5e32-4be7-899e-efd1e157544c"
+                            UserId = "b6c92e9a-cd07-44d8-a04c-e88f71043605",
+                            RoleId = "cdbc33d2-32e8-4d77-8e49-4639db15236e"
                         },
                         new
                         {
-                            UserId = "2d225fab-61e1-4de2-b728-b1a55824eb6e",
-                            RoleId = "f62246ee-4d5b-4834-bf1b-961e6032de1b"
+                            UserId = "57e7dbef-8217-484c-9d02-a87135d99ad5",
+                            RoleId = "9f91751c-b626-48ac-aa0d-5f2b727f5457"
                         });
                 });
 
@@ -286,7 +286,6 @@ namespace WMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ManagerId")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
@@ -300,6 +299,10 @@ namespace WMS.Infrastructure.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("OrderBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("PaidDate")
                         .HasColumnType("datetime2");
@@ -758,86 +761,86 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5ad39a0b-0377-47dd-98ef-f53c56e07c4d",
+                            Id = "3a99b1a0-447c-4dcc-8ee6-e4cac9d607f9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa809c73-6f85-4594-b17e-6ae919fc2a0a",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5485),
+                            ConcurrencyStamp = "275db0f3-0802-4a2a-9742-db10145b80d5",
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2472),
                             Email = "nghuuan2803@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "NGHUUAN2803@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMVp3WvOM+JCwCWl+XHQz3sbT7Gx6XysKfK5nxFNSAf0PMUJUpJkk4QBk/fLCFwrxw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPHFPXVzEnN3ZdFnOwF3A1sw39tHzgH2E6zI29dZYHF81Egf1s7ijLqidlLehCvX7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e62a09fc-28da-4b7e-98d3-786fcf1b69ce",
+                            SecurityStamp = "82e0c077-a8e5-4cb2-b1a1-43ea673cf497",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "9672afb8-f6db-4c85-95c0-b1384e44df2f",
+                            Id = "4963eb73-4dcd-4a7c-8e3d-daedc4f1d32a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5d8772b8-eaeb-4c4e-81c3-5dd5e85eaf10",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5607),
+                            ConcurrencyStamp = "cc8bed05-56cd-416e-a963-06498c9f46e3",
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2587),
                             Email = "anhuu2803@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANHUU2803@GMAIL.COM",
                             NormalizedUserName = "SUPERMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFu0dlBvg6I3tF6kRgHnqfP1X6+KojLeXMI4vwAzbEF5/j4AGFTfMtMTztqFGoIRpw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMsJmT4odOqjry3WcY3FktKUrYho8jrH5y/szGw8T5HcQOVtuHXiLFJNJqLhEDjeqQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e5a19ecb-a6cf-411e-b9d4-494c9256c2ef",
+                            SecurityStamp = "45a08423-a6a6-4215-b44b-132165e80f55",
                             TwoFactorEnabled = false,
                             UserName = "supermanager"
                         },
                         new
                         {
-                            Id = "3c070b4b-2939-4047-8704-d75761a102d5",
+                            Id = "dcc8e952-2c5f-4283-a6a5-e091125f0a6c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3805b422-0b34-407b-9a2c-13cc1ab69a14",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5616),
+                            ConcurrencyStamp = "82cba0e7-6415-4da3-b440-0088577ebb3c",
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2601),
                             Email = "huuann28@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "HUUANN28@GMAIL.COM",
                             NormalizedUserName = "BRANCHMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEiyJQM7f0naZn9XdtRNZW1w+4SnVS1A+otUH0+85lfemJoGfz5enJHb/culcfMT5g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJsaLXzjhBxsek9bgiqmpTdwcaPxeymrKI3pWBhHTeG3fqkk5QpiL67KgsbZwVeMqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0ede3f88-c045-41f0-a6a1-2453723fa024",
+                            SecurityStamp = "756e32bf-2b28-4bcb-86b4-0b0323f94c0d",
                             TwoFactorEnabled = false,
                             UserName = "branchmanager"
                         },
                         new
                         {
-                            Id = "f679a72f-2475-4fdc-a1ce-f61f771f596d",
+                            Id = "b6c92e9a-cd07-44d8-a04c-e88f71043605",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "99d61117-8a26-45ba-bb64-d7d90f1129d6",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5627),
+                            ConcurrencyStamp = "e4b7906f-5c88-49fd-9016-89cacab1fc0b",
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2614),
                             Email = "an2831998@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "AN2831998@GMAIL.COM",
                             NormalizedUserName = "AGENCY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAMslGtvb0U/Jx+J/km/NtN8fkYJeUhKoRb0wMzSfNttXhMP/KqakmqkKZAgn0PsqQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEkRbPXO1TUdK2x0qC5bT9IjLjBGRLHCggEbVZNw30qSVsMfhkPDvFDDPNP5VblEQA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "012aeb7e-5877-4f97-aac9-7cf8895489de",
+                            SecurityStamp = "59ef4b4d-0aab-4fe6-8d51-fb59b762b637",
                             TwoFactorEnabled = false,
                             UserName = "agency"
                         },
                         new
                         {
-                            Id = "2d225fab-61e1-4de2-b728-b1a55824eb6e",
+                            Id = "57e7dbef-8217-484c-9d02-a87135d99ad5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cdf7dadd-ef82-4f52-894e-621335487788",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5635),
+                            ConcurrencyStamp = "57d30973-3493-4179-97d1-18d3ab6c1602",
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2624),
                             Email = "abcde@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ABCDE@GMAIL.COM",
                             NormalizedUserName = "ACCOUNTANT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF95SQT5nFzrtFursfVU2W5RgEDJ4jgvhtQwMOQCGurJE5qd6ohl580HOuMOlC7hyA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFNSfJZQ4bfJloUY6GZNKNV5+l/TJokELKj3IZvE4vFEfHRiKI70sRiCt+RHdPk//g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "14120b56-46c9-4abe-a8e7-ca04dce6b87a",
+                            SecurityStamp = "1322af4b-769c-4d13-928c-ef725a9e46f7",
                             TwoFactorEnabled = false,
                             UserName = "accountant"
                         });
@@ -1397,7 +1400,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0001",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2015),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8968),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1408,7 +1411,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0002",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2035),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8988),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1419,7 +1422,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0003",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2037),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8989),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1430,7 +1433,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0004",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2039),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8991),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1441,7 +1444,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0005",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2041),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8993),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1452,7 +1455,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0006",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2044),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8997),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1463,7 +1466,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0007",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2046),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8998),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1474,7 +1477,7 @@ namespace WMS.Infrastructure.Migrations
                         new
                         {
                             Id = "SP0008",
-                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2048),
+                            CreatedOn = new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(9000),
                             Deleted = false,
                             Discontinued = false,
                             ImportPrice = 0.0,
@@ -1689,8 +1692,7 @@ namespace WMS.Infrastructure.Migrations
                     b.HasOne("WMS.Domain.Entities.Organization.Employee", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Agency");
 

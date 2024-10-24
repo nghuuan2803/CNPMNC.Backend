@@ -112,7 +112,8 @@ namespace WMS.Application.Services.Activities
                 }
 
                 await unitOfWork.CommitAsync();
-                return new BaseResult<Import>(model);
+                var newData = await unitOfWork.ImportRepository.GetAsync(p => p.Id == model.Id);
+                return new BaseResult<Import>(newData);
             }
             catch (Exception e)
             {

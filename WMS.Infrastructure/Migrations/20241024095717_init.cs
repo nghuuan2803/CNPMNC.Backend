@@ -392,13 +392,14 @@ namespace WMS.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     InvoiceImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaidDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AgencyId = table.Column<int>(type: "int", nullable: false),
-                    ManagerId = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    ManagerId = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -740,11 +741,11 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4ccff108-bdd6-4fa7-a6e8-8d623a9c8bad", null, "branchManager", "BRANCHMANAGER" },
-                    { "a15f2296-5e32-4be7-899e-efd1e157544c", null, "agency", "AGENCY" },
-                    { "e0b6f1f9-1497-484a-90e9-0d5c062c9cd8", null, "supermanager", "SUPERMANAGER" },
-                    { "ea543299-c741-48ad-a7f3-3a58b635e183", null, "admin", "ADMIN" },
-                    { "f62246ee-4d5b-4834-bf1b-961e6032de1b", null, "accountant", "ACCOUNTANT" }
+                    { "17cee6b0-f1b3-479a-a896-146ae598c50b", null, "admin", "ADMIN" },
+                    { "67720c0f-f08f-4d03-bb3f-56533aed370e", null, "branchManager", "BRANCHMANAGER" },
+                    { "83601cc7-c0de-4593-a48d-20a628eae27b", null, "supermanager", "SUPERMANAGER" },
+                    { "9f91751c-b626-48ac-aa0d-5f2b727f5457", null, "accountant", "ACCOUNTANT" },
+                    { "cdbc33d2-32e8-4d77-8e49-4639db15236e", null, "agency", "AGENCY" }
                 });
 
             migrationBuilder.InsertData(
@@ -752,11 +753,11 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AgencyId", "ConcurrencyStamp", "CreatedOn", "Email", "EmailConfirmed", "EmployeeId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "2d225fab-61e1-4de2-b728-b1a55824eb6e", 0, null, "cdf7dadd-ef82-4f52-894e-621335487788", new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5635), "abcde@gmail.com", false, null, false, null, "ABCDE@GMAIL.COM", "ACCOUNTANT", "AQAAAAIAAYagAAAAEF95SQT5nFzrtFursfVU2W5RgEDJ4jgvhtQwMOQCGurJE5qd6ohl580HOuMOlC7hyA==", null, false, "14120b56-46c9-4abe-a8e7-ca04dce6b87a", false, "accountant" },
-                    { "3c070b4b-2939-4047-8704-d75761a102d5", 0, null, "3805b422-0b34-407b-9a2c-13cc1ab69a14", new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5616), "huuann28@gmail.com", false, null, false, null, "HUUANN28@GMAIL.COM", "BRANCHMANAGER", "AQAAAAIAAYagAAAAEEiyJQM7f0naZn9XdtRNZW1w+4SnVS1A+otUH0+85lfemJoGfz5enJHb/culcfMT5g==", null, false, "0ede3f88-c045-41f0-a6a1-2453723fa024", false, "branchmanager" },
-                    { "5ad39a0b-0377-47dd-98ef-f53c56e07c4d", 0, null, "aa809c73-6f85-4594-b17e-6ae919fc2a0a", new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5485), "nghuuan2803@gmail.com", false, null, false, null, "NGHUUAN2803@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEMVp3WvOM+JCwCWl+XHQz3sbT7Gx6XysKfK5nxFNSAf0PMUJUpJkk4QBk/fLCFwrxw==", null, false, "e62a09fc-28da-4b7e-98d3-786fcf1b69ce", false, "admin" },
-                    { "9672afb8-f6db-4c85-95c0-b1384e44df2f", 0, null, "5d8772b8-eaeb-4c4e-81c3-5dd5e85eaf10", new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5607), "anhuu2803@gmail.com", false, null, false, null, "ANHUU2803@GMAIL.COM", "SUPERMANAGER", "AQAAAAIAAYagAAAAEFu0dlBvg6I3tF6kRgHnqfP1X6+KojLeXMI4vwAzbEF5/j4AGFTfMtMTztqFGoIRpw==", null, false, "e5a19ecb-a6cf-411e-b9d4-494c9256c2ef", false, "supermanager" },
-                    { "f679a72f-2475-4fdc-a1ce-f61f771f596d", 0, null, "99d61117-8a26-45ba-bb64-d7d90f1129d6", new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5627), "an2831998@gmail.com", false, null, false, null, "AN2831998@GMAIL.COM", "AGENCY", "AQAAAAIAAYagAAAAEAMslGtvb0U/Jx+J/km/NtN8fkYJeUhKoRb0wMzSfNttXhMP/KqakmqkKZAgn0PsqQ==", null, false, "012aeb7e-5877-4f97-aac9-7cf8895489de", false, "agency" }
+                    { "3a99b1a0-447c-4dcc-8ee6-e4cac9d607f9", 0, null, "275db0f3-0802-4a2a-9742-db10145b80d5", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2472), "nghuuan2803@gmail.com", false, null, false, null, "NGHUUAN2803@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEPHFPXVzEnN3ZdFnOwF3A1sw39tHzgH2E6zI29dZYHF81Egf1s7ijLqidlLehCvX7g==", null, false, "82e0c077-a8e5-4cb2-b1a1-43ea673cf497", false, "admin" },
+                    { "4963eb73-4dcd-4a7c-8e3d-daedc4f1d32a", 0, null, "cc8bed05-56cd-416e-a963-06498c9f46e3", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2587), "anhuu2803@gmail.com", false, null, false, null, "ANHUU2803@GMAIL.COM", "SUPERMANAGER", "AQAAAAIAAYagAAAAEMsJmT4odOqjry3WcY3FktKUrYho8jrH5y/szGw8T5HcQOVtuHXiLFJNJqLhEDjeqQ==", null, false, "45a08423-a6a6-4215-b44b-132165e80f55", false, "supermanager" },
+                    { "57e7dbef-8217-484c-9d02-a87135d99ad5", 0, null, "57d30973-3493-4179-97d1-18d3ab6c1602", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2624), "abcde@gmail.com", false, null, false, null, "ABCDE@GMAIL.COM", "ACCOUNTANT", "AQAAAAIAAYagAAAAEFNSfJZQ4bfJloUY6GZNKNV5+l/TJokELKj3IZvE4vFEfHRiKI70sRiCt+RHdPk//g==", null, false, "1322af4b-769c-4d13-928c-ef725a9e46f7", false, "accountant" },
+                    { "b6c92e9a-cd07-44d8-a04c-e88f71043605", 0, null, "e4b7906f-5c88-49fd-9016-89cacab1fc0b", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2614), "an2831998@gmail.com", false, null, false, null, "AN2831998@GMAIL.COM", "AGENCY", "AQAAAAIAAYagAAAAEEkRbPXO1TUdK2x0qC5bT9IjLjBGRLHCggEbVZNw30qSVsMfhkPDvFDDPNP5VblEQA==", null, false, "59ef4b4d-0aab-4fe6-8d51-fb59b762b637", false, "agency" },
+                    { "dcc8e952-2c5f-4283-a6a5-e091125f0a6c", 0, null, "82cba0e7-6415-4da3-b440-0088577ebb3c", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2601), "huuann28@gmail.com", false, null, false, null, "HUUANN28@GMAIL.COM", "BRANCHMANAGER", "AQAAAAIAAYagAAAAEJsaLXzjhBxsek9bgiqmpTdwcaPxeymrKI3pWBhHTeG3fqkk5QpiL67KgsbZwVeMqw==", null, false, "756e32bf-2b28-4bcb-86b4-0b0323f94c0d", false, "branchmanager" }
                 });
 
             migrationBuilder.InsertData(
@@ -811,14 +812,14 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "Id", "BrandId", "CategoryId", "CreatedBy", "CreatedOn", "Deleted", "Description", "Discontinued", "ImportPrice", "ModifiedBy", "ModifiedOn", "Name", "Photo", "Price", "Quantity" },
                 values: new object[,]
                 {
-                    { "SP0001", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2015), false, null, false, 0.0, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
-                    { "SP0002", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2035), false, null, false, 0.0, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
-                    { "SP0003", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2037), false, null, false, 0.0, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
-                    { "SP0004", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2039), false, null, false, 0.0, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
-                    { "SP0005", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2041), false, null, false, 0.0, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
-                    { "SP0006", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2044), false, null, false, 0.0, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
-                    { "SP0007", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2046), false, null, false, 0.0, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
-                    { "SP0008", null, null, null, new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2048), false, null, false, 0.0, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
+                    { "SP0001", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8968), false, null, false, 0.0, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
+                    { "SP0002", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8988), false, null, false, 0.0, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
+                    { "SP0003", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8989), false, null, false, 0.0, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
+                    { "SP0004", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8991), false, null, false, 0.0, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
+                    { "SP0005", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8993), false, null, false, 0.0, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
+                    { "SP0006", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8997), false, null, false, 0.0, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
+                    { "SP0007", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8998), false, null, false, 0.0, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
+                    { "SP0008", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(9000), false, null, false, 0.0, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -840,11 +841,11 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "f62246ee-4d5b-4834-bf1b-961e6032de1b", "2d225fab-61e1-4de2-b728-b1a55824eb6e" },
-                    { "4ccff108-bdd6-4fa7-a6e8-8d623a9c8bad", "3c070b4b-2939-4047-8704-d75761a102d5" },
-                    { "ea543299-c741-48ad-a7f3-3a58b635e183", "5ad39a0b-0377-47dd-98ef-f53c56e07c4d" },
-                    { "e0b6f1f9-1497-484a-90e9-0d5c062c9cd8", "9672afb8-f6db-4c85-95c0-b1384e44df2f" },
-                    { "a15f2296-5e32-4be7-899e-efd1e157544c", "f679a72f-2475-4fdc-a1ce-f61f771f596d" }
+                    { "17cee6b0-f1b3-479a-a896-146ae598c50b", "3a99b1a0-447c-4dcc-8ee6-e4cac9d607f9" },
+                    { "83601cc7-c0de-4593-a48d-20a628eae27b", "4963eb73-4dcd-4a7c-8e3d-daedc4f1d32a" },
+                    { "9f91751c-b626-48ac-aa0d-5f2b727f5457", "57e7dbef-8217-484c-9d02-a87135d99ad5" },
+                    { "cdbc33d2-32e8-4d77-8e49-4639db15236e", "b6c92e9a-cd07-44d8-a04c-e88f71043605" },
+                    { "67720c0f-f08f-4d03-bb3f-56533aed370e", "dcc8e952-2c5f-4283-a6a5-e091125f0a6c" }
                 });
 
             migrationBuilder.CreateIndex(
