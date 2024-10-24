@@ -55,31 +55,31 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0a12453d-102f-4cd1-928a-4ec88cebeb93",
+                            Id = "ea543299-c741-48ad-a7f3-3a58b635e183",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6386112a-a338-4566-be73-3d0348980ac5",
+                            Id = "e0b6f1f9-1497-484a-90e9-0d5c062c9cd8",
                             Name = "supermanager",
                             NormalizedName = "SUPERMANAGER"
                         },
                         new
                         {
-                            Id = "a10dd2e4-b70f-4b3c-99d8-0e317ca5256a",
+                            Id = "a15f2296-5e32-4be7-899e-efd1e157544c",
                             Name = "agency",
                             NormalizedName = "AGENCY"
                         },
                         new
                         {
-                            Id = "bfb2697f-2706-40e8-b7a4-d214b5ab72f8",
+                            Id = "4ccff108-bdd6-4fa7-a6e8-8d623a9c8bad",
                             Name = "branchManager",
                             NormalizedName = "BRANCHMANAGER"
                         },
                         new
                         {
-                            Id = "72947333-97b1-4e4d-8e8a-7e0c3666c1c7",
+                            Id = "f62246ee-4d5b-4834-bf1b-961e6032de1b",
                             Name = "accountant",
                             NormalizedName = "ACCOUNTANT"
                         });
@@ -182,28 +182,28 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "31df6aff-965a-401f-bc6c-f3281423ceba",
-                            RoleId = "0a12453d-102f-4cd1-928a-4ec88cebeb93"
+                            UserId = "5ad39a0b-0377-47dd-98ef-f53c56e07c4d",
+                            RoleId = "ea543299-c741-48ad-a7f3-3a58b635e183"
                         },
                         new
                         {
-                            UserId = "a1e33903-c511-4c5b-a598-de34dc956add",
-                            RoleId = "6386112a-a338-4566-be73-3d0348980ac5"
+                            UserId = "9672afb8-f6db-4c85-95c0-b1384e44df2f",
+                            RoleId = "e0b6f1f9-1497-484a-90e9-0d5c062c9cd8"
                         },
                         new
                         {
-                            UserId = "c0bb6a4e-970e-4f89-8aa0-1b3dbed98396",
-                            RoleId = "bfb2697f-2706-40e8-b7a4-d214b5ab72f8"
+                            UserId = "3c070b4b-2939-4047-8704-d75761a102d5",
+                            RoleId = "4ccff108-bdd6-4fa7-a6e8-8d623a9c8bad"
                         },
                         new
                         {
-                            UserId = "7e432540-8054-4f22-a474-d4945f4fd154",
-                            RoleId = "a10dd2e4-b70f-4b3c-99d8-0e317ca5256a"
+                            UserId = "f679a72f-2475-4fdc-a1ce-f61f771f596d",
+                            RoleId = "a15f2296-5e32-4be7-899e-efd1e157544c"
                         },
                         new
                         {
-                            UserId = "97d7f813-3087-47fa-8c2b-33878aafbc43",
-                            RoleId = "72947333-97b1-4e4d-8e8a-7e0c3666c1c7"
+                            UserId = "2d225fab-61e1-4de2-b728-b1a55824eb6e",
+                            RoleId = "f62246ee-4d5b-4834-bf1b-961e6032de1b"
                         });
                 });
 
@@ -240,8 +240,9 @@ namespace WMS.Infrastructure.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -272,14 +273,17 @@ namespace WMS.Infrastructure.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<DateTime?>("CompletedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("InvoiceId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvoiceImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ManagerId")
                         .IsRequired()
@@ -323,8 +327,9 @@ namespace WMS.Infrastructure.Migrations
                     b.Property<int>("ExportId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -333,7 +338,6 @@ namespace WMS.Infrastructure.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("WarehouseId")
-                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("varchar(5)");
@@ -351,23 +355,28 @@ namespace WMS.Infrastructure.Migrations
 
             modelBuilder.Entity("WMS.Domain.Entities.Activities.Import", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<DateTime?>("CompletedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<bool>("Cancelled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CheckPassed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("InvoiceImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -385,8 +394,8 @@ namespace WMS.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("PaidDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("SuplierId")
                         .HasColumnType("int");
@@ -416,11 +425,13 @@ namespace WMS.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ImportId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImportId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -491,6 +502,52 @@ namespace WMS.Infrastructure.Migrations
                     b.HasIndex("WarehouseId");
 
                     b.ToTable("InventoryChecks");
+                });
+
+            modelBuilder.Entity("WMS.Domain.Entities.Activities.Merge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)");
+
+                    b.Property<DateTime>("MergeDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("To")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("From");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("To");
+
+                    b.ToTable("Merge");
                 });
 
             modelBuilder.Entity("WMS.Domain.Entities.Activities.Return", b =>
@@ -568,8 +625,9 @@ namespace WMS.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -700,86 +758,86 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "31df6aff-965a-401f-bc6c-f3281423ceba",
+                            Id = "5ad39a0b-0377-47dd-98ef-f53c56e07c4d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cacc851c-81bf-45f7-99af-3de7af6fec87",
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 448, DateTimeKind.Local).AddTicks(1371),
+                            ConcurrencyStamp = "aa809c73-6f85-4594-b17e-6ae919fc2a0a",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5485),
                             Email = "nghuuan2803@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "NGHUUAN2803@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIAewrJHbk0wI5BEl60XehvAweNDNQ4VLz4IJ6TjshecJWM4ImfvKnuAt6+ZShV8PQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMVp3WvOM+JCwCWl+XHQz3sbT7Gx6XysKfK5nxFNSAf0PMUJUpJkk4QBk/fLCFwrxw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e537bef9-ff91-4c5f-8f6a-c447dafe2a09",
+                            SecurityStamp = "e62a09fc-28da-4b7e-98d3-786fcf1b69ce",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "a1e33903-c511-4c5b-a598-de34dc956add",
+                            Id = "9672afb8-f6db-4c85-95c0-b1384e44df2f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22f05d88-7fa4-4fa5-947c-1d350d11a8d1",
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 448, DateTimeKind.Local).AddTicks(1485),
+                            ConcurrencyStamp = "5d8772b8-eaeb-4c4e-81c3-5dd5e85eaf10",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5607),
                             Email = "anhuu2803@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANHUU2803@GMAIL.COM",
                             NormalizedUserName = "SUPERMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPmP8PNe8Q8YItzsmWKSC6u1ZxpXg5QGNUTrGzKwOsdG2CPQZJ8Xrcfn8gFYKk84fQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFu0dlBvg6I3tF6kRgHnqfP1X6+KojLeXMI4vwAzbEF5/j4AGFTfMtMTztqFGoIRpw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d3e17136-ce52-43f4-90b9-812733bad665",
+                            SecurityStamp = "e5a19ecb-a6cf-411e-b9d4-494c9256c2ef",
                             TwoFactorEnabled = false,
                             UserName = "supermanager"
                         },
                         new
                         {
-                            Id = "c0bb6a4e-970e-4f89-8aa0-1b3dbed98396",
+                            Id = "3c070b4b-2939-4047-8704-d75761a102d5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1467f4fb-1bc2-4114-bc88-3ee76e2408d9",
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 448, DateTimeKind.Local).AddTicks(1495),
+                            ConcurrencyStamp = "3805b422-0b34-407b-9a2c-13cc1ab69a14",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5616),
                             Email = "huuann28@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "HUUANN28@GMAIL.COM",
                             NormalizedUserName = "BRANCHMANAGER",
-                            PasswordHash = "AQAAAAIAAYagAAAAENfMTOoWHPgEdeRFQliHj7CFN2DHc9dk1bA+OCHnGZ7vCWHR5fLebSPS4m1hvsJCZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEiyJQM7f0naZn9XdtRNZW1w+4SnVS1A+otUH0+85lfemJoGfz5enJHb/culcfMT5g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "14bfecaf-2465-4077-b3a7-b801b188f4b4",
+                            SecurityStamp = "0ede3f88-c045-41f0-a6a1-2453723fa024",
                             TwoFactorEnabled = false,
                             UserName = "branchmanager"
                         },
                         new
                         {
-                            Id = "7e432540-8054-4f22-a474-d4945f4fd154",
+                            Id = "f679a72f-2475-4fdc-a1ce-f61f771f596d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6557bea6-b2e3-4cea-8ed6-9f06bdb776aa",
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 448, DateTimeKind.Local).AddTicks(1506),
+                            ConcurrencyStamp = "99d61117-8a26-45ba-bb64-d7d90f1129d6",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5627),
                             Email = "an2831998@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "AN2831998@GMAIL.COM",
                             NormalizedUserName = "AGENCY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFFw6PhcTqUmZB0dDN2jwjFUekmtHookA1XU6Qr4xtjd9c1dTpLguqUl+2IxFZYMIw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAMslGtvb0U/Jx+J/km/NtN8fkYJeUhKoRb0wMzSfNttXhMP/KqakmqkKZAgn0PsqQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "96f3c46c-fa63-4ed6-a61f-f302ed245339",
+                            SecurityStamp = "012aeb7e-5877-4f97-aac9-7cf8895489de",
                             TwoFactorEnabled = false,
                             UserName = "agency"
                         },
                         new
                         {
-                            Id = "97d7f813-3087-47fa-8c2b-33878aafbc43",
+                            Id = "2d225fab-61e1-4de2-b728-b1a55824eb6e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1efd6a7e-7789-44ce-8b3e-61ac63283894",
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 448, DateTimeKind.Local).AddTicks(1514),
+                            ConcurrencyStamp = "cdf7dadd-ef82-4f52-894e-621335487788",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(5635),
                             Email = "abcde@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ABCDE@GMAIL.COM",
                             NormalizedUserName = "ACCOUNTANT",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBmMJqI3C6rm9FkCph6OKkLeU3sDsYj0uUy1XmHzkNVJ5gs/Gy6id8i7SUndIRdiRg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF95SQT5nFzrtFursfVU2W5RgEDJ4jgvhtQwMOQCGurJE5qd6ohl580HOuMOlC7hyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e97cb0c9-71cf-4a5d-9734-3d7f67afaca9",
+                            SecurityStamp = "14120b56-46c9-4abe-a8e7-ca04dce6b87a",
                             TwoFactorEnabled = false,
                             UserName = "accountant"
                         });
@@ -991,8 +1049,9 @@ namespace WMS.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -1012,6 +1071,26 @@ namespace WMS.Infrastructure.Migrations
                     b.ToTable("Inventories");
                 });
 
+            modelBuilder.Entity("WMS.Domain.Entities.ProductGroup.Item", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(40)");
+
+                    b.Property<string>("BatchId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Exported")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StockAt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Item");
+                });
+
             modelBuilder.Entity("WMS.Domain.Entities.ProductInfo.Batch", b =>
                 {
                     b.Property<string>("Id")
@@ -1025,8 +1104,8 @@ namespace WMS.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ImportId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImportId")
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateOnly>("ManufactureDate")
                         .HasColumnType("date");
@@ -1043,8 +1122,9 @@ namespace WMS.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(5)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -1254,11 +1334,10 @@ namespace WMS.Infrastructure.Migrations
 
             modelBuilder.Entity("WMS.Domain.Entities.ProductInfo.Product", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
@@ -1280,6 +1359,9 @@ namespace WMS.Infrastructure.Migrations
 
                     b.Property<bool>("Discontinued")
                         .HasColumnType("bit");
+
+                    b.Property<double>("ImportPrice")
+                        .HasColumnType("float");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1314,80 +1396,88 @@ namespace WMS.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7886),
+                            Id = "SP0001",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2015),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Sony Bravia QLED SQ101",
                             Price = 10000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7905),
+                            Id = "SP0002",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2035),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Sony Bravia OLED SN101",
                             Price = 15000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7906),
+                            Id = "SP0003",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2037),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Sam Sung QLED SSQ113",
                             Price = 12000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 4,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7907),
+                            Id = "SP0004",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2039),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Sam Sung OLED SS115",
                             Price = 9000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 5,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7907),
+                            Id = "SP0005",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2041),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Điều hòa Panasonic siêu mát lạnh",
                             Price = 6000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 6,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7910),
+                            Id = "SP0006",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2044),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Máy lạnh Tosiba buốt giá con tim",
                             Price = 5000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 7,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7910),
+                            Id = "SP0007",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2046),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Tủ lạnh LG GG",
                             Price = 7000000.0,
                             Quantity = 0
                         },
                         new
                         {
-                            Id = 8,
-                            CreatedOn = new DateTime(2024, 10, 12, 23, 25, 13, 447, DateTimeKind.Local).AddTicks(7911),
+                            Id = "SP0008",
+                            CreatedOn = new DateTime(2024, 10, 22, 0, 58, 57, 426, DateTimeKind.Local).AddTicks(2048),
                             Deleted = false,
                             Discontinued = false,
+                            ImportPrice = 0.0,
                             Name = "Máy giặt AQUA ảo quá",
                             Price = 8000000.0,
                             Quantity = 0
@@ -1624,8 +1714,7 @@ namespace WMS.Infrastructure.Migrations
                     b.HasOne("WMS.Domain.Entities.Locations.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Export");
 
@@ -1697,6 +1786,41 @@ namespace WMS.Infrastructure.Migrations
                     b.Navigation("Manager");
 
                     b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("WMS.Domain.Entities.Activities.Merge", b =>
+                {
+                    b.HasOne("WMS.Domain.Entities.Organization.Employee", "Manager")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WMS.Domain.Entities.Locations.Warehouse", "Src")
+                        .WithMany()
+                        .HasForeignKey("From")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("WMS.Domain.Entities.ProductInfo.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WMS.Domain.Entities.Locations.Warehouse", "Dest")
+                        .WithMany()
+                        .HasForeignKey("To")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Dest");
+
+                    b.Navigation("Manager");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Src");
                 });
 
             modelBuilder.Entity("WMS.Domain.Entities.Activities.Return", b =>
@@ -1805,6 +1929,17 @@ namespace WMS.Infrastructure.Migrations
                     b.Navigation("Warehouse");
                 });
 
+            modelBuilder.Entity("WMS.Domain.Entities.ProductGroup.Item", b =>
+                {
+                    b.HasOne("WMS.Domain.Entities.ProductInfo.Batch", "Batch")
+                        .WithMany("Items")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Batch");
+                });
+
             modelBuilder.Entity("WMS.Domain.Entities.ProductInfo.Batch", b =>
                 {
                     b.HasOne("WMS.Domain.Entities.Activities.Import", "Import")
@@ -1869,6 +2004,11 @@ namespace WMS.Infrastructure.Migrations
             modelBuilder.Entity("WMS.Domain.Entities.Locations.Warehouse", b =>
                 {
                     b.Navigation("Stocks");
+                });
+
+            modelBuilder.Entity("WMS.Domain.Entities.ProductInfo.Batch", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("WMS.Domain.Entities.ProductInfo.Brand", b =>

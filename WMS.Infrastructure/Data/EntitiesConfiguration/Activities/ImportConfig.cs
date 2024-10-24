@@ -8,6 +8,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.Activities
     {
         public void Configure(EntityTypeBuilder<Import> builder)
         {
+            builder.Property(p => p.Id).IsUnicode(false).HasMaxLength(36);
             builder.Property(p => p.OrderBy).IsUnicode(false);
             builder.Property(p => p.WarehouseId).IsUnicode(false);
             builder.HasOne(p=>p.Manager).WithMany().HasForeignKey(p=>p.OrderBy).OnDelete(DeleteBehavior.Restrict);

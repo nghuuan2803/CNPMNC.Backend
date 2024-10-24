@@ -9,7 +9,7 @@ namespace WMS.Domain.Entities.ProductGroup
         [Key]
         public int Id { get; set; }
 
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         [StringLength(5)]
         public string WarehouseId { get; set; }

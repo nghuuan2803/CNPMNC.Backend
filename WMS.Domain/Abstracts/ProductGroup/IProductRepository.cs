@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WMS.Domain.Entities.ProductInfo;
+﻿using WMS.Domain.Entities.ProductInfo;
 
 namespace WMS.Domain.Abstracts.ProductRepo
 {
-    public interface IProductRepository : IBaseRepository<Product, int>
+    public interface IProductRepository : IBaseRepository<Product, string>
     {
     }
 }

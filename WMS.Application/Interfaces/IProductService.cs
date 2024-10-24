@@ -3,8 +3,8 @@ using WMS.Domain.Entities.ProductInfo;
 
 namespace WMS.Application.Interfaces
 {
-    public interface IProductService : IBaseService<Product, int>
+    public interface IProductService : IBaseService<Product, string>
     {
-        Task<BaseResult> RecoverAsync(int id);
+        Task<BaseResult> RecoverAsync(string id);
     }
 }

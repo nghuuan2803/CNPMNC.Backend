@@ -25,17 +25,17 @@ namespace WMS.WebAPI.Controllers
             return BadRequest(new BaseResponse(result.Message!));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] ImportDTO dto)
+        [HttpPut("cancel")]
+        public async Task<IActionResult> Cancel([FromBody] string id)
         {
-            var model = _mapper.Map<Import>(dto);
-            var result = await service.UpdateAsync(model);
+            var result = await service.CancelAsync(id);
             if (result.Succeeded)
                 return Ok(new BaseResponse(result.Message!));
             return BadRequest(new BaseResponse(result.Message!));
         }
+
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             var result = await service.DeleteAsync(id);
             if (result.Succeeded)
@@ -55,25 +55,14 @@ namespace WMS.WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("get/{id}")]
+        public async Task<IActionResult> Get(string id)
         {
-            var result = await service.FindByIdAsync(id);
+            var result = await service.GetAsync(p => p.Id == id);
             if (result.Succeeded)
             {
                 var data = _mapper.Map<ImportDTO>(result.Data);
                 return Ok(new BaseResponse<ImportDTO>(data, result.Message!));
-            }
-            return BadRequest(result.Message);
-        }
-
-        [HttpPost("update-status")]
-        public async Task<IActionResult> UpdateStatus([FromBody] UpdateImportStatusRequest dto)
-        {
-            var result = await service.UpdateStatus(dto);
-            if (result.Succeeded)
-            {
-                return Ok(new BaseResponse(result.Message!));
             }
             return BadRequest(result.Message);
         }

@@ -12,7 +12,7 @@ namespace WMS.Application.DTOs.Responses
         public string? ModifiedBy { get; set; }
         public double Amount { get; set; }
 
-        public ImportStatus Status { get; set; }
+        public bool Cancelled { get; set; }
 
         public DateTime? CompletedDate { get; set; }
 
@@ -29,7 +29,7 @@ namespace WMS.Application.DTOs.Responses
         public int Id { get; set; }
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
         public string ProductName { get; set; }
         public string? Photo { get; set; }
     }

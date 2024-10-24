@@ -2,18 +2,12 @@
 using WMS.Domain.Entities.Locations;
 using WMS.Domain.Entities.Organization;
 using WMS.Domain.Entities.ProductInfo;
-using WMS.Domain.Enums;
 
 namespace WMS.Domain.Entities.Activities
 {
-    public class Import: BaseEntity<int>
+    public class Import: BaseEntity<string>
     {
-
         public double Amount { get; set; }
-
-        public ImportStatus Status { get; set; }
-
-        public DateTime? CompletedDate { get; set; }
 
         [StringLength(200)]
         public string? Note { get; set; }
@@ -33,5 +27,13 @@ namespace WMS.Domain.Entities.Activities
         public Warehouse? Warehouse { get; set; }
 
         public ICollection<ImportDetail>? Items { get; set; }
+
+        public string? InvoiceImage { get; set; }
+
+        public bool CheckPassed { get; set; } = true;
+
+        public DateTime? PaidDate { get; set; }
+
+        public bool Cancelled { get; set; }
     }
 }

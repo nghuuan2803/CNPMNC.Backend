@@ -1,17 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WMS.Domain.Entities.ProductGroup;
-
-namespace WMS.Domain.Entities.ProductInfo
+﻿namespace WMS.Application.DTOs.Requests.ProductGroup
 {
-    public class Product : BaseEntity<string>
+    public class ProductDetails
     {
-        [StringLength(50)]
         public string Name { get; set; }
 
-        [Range(0, 9000000000)]
+        //[Range(0, 9000000000)]
         public double Price { get; set; }
 
-        [Range(0, 9000000000)]
+        //[Range(0, 9000000000)]
         public double ImportPrice { get; set; }
 
         public int Quantity { get; set; }
@@ -20,7 +16,7 @@ namespace WMS.Domain.Entities.ProductInfo
 
         public bool Deleted { get; set; }
 
-        [StringLength(150)]
+        //[StringLength(150)]
         public string? Photo { get; set; }
 
         public string? Description { get; set; }
@@ -29,9 +25,11 @@ namespace WMS.Domain.Entities.ProductInfo
 
         public int? BrandId { get; set; } //FK
 
-        public Category? Category { get; set; }
-        public Brand? Brand { get; set; }
+        public string Id { get; set; }
 
-        public ICollection<Inventory> Stocks { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public string? ModifiedBy { get; set; }
     }
 }

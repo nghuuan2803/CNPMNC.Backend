@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using WMS.Application.DTOs.Requests.Activities;
 using WMS.Application.DTOs.Results;
 using WMS.Domain.Entities.Activities;
 
@@ -9,21 +8,11 @@ namespace WMS.Application.Interfaces
     {
         Task<BaseResult<Import>> CreateAsync(Import model);
 
-        Task<BaseResult<ImportDetail>> AddItemAsync(ImportDetail model);
+        Task<BaseResult> CancelAsync(string id);
 
-        Task<BaseResult> UpdateAsync(Import model);
+        Task<BaseResult> DeleteAsync(string id);
 
-        Task<BaseResult> UpdateItemsAsync(ImportDetail item);
-
-        Task<BaseResult> UpdateStatus(UpdateImportStatusRequest model);
-
-        Task<BaseResult> CancelAsync(Import model);
-
-        Task<BaseResult> DeleteAsync(int id);
-
-        Task<BaseResult> DeleteItemAsync(ImportDetail model);
-
-        Task<BaseResult<Import>> FindByIdAsync(int id);
+        Task<BaseResult<Import>> FindByIdAsync(string id);
 
         Task<BaseResult<Import>> GetAsync(Expression<Func<Import, bool>> predicate);
 

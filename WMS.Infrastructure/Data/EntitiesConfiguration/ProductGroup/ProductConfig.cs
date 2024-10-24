@@ -9,6 +9,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.Property(p => p.Photo).IsUnicode(false);
+            builder.Property(p => p.Id).IsUnicode(false).HasMaxLength(10);
 
             // Product -(n)-------(1)- Category || 1 category has many product <-> 1 product has only one category
             //builder.HasOne(p => p.Category).WithMany().HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.SetNull);
@@ -30,7 +31,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
             var data = new List<Product>();
             for (int i = 1; i <= names.Length; i++)
             {
-                data.Add(new Product { Id = i, Name = names[i - 1], Price = prices[i - 1], CreatedOn = DateTime.Now });
+                data.Add(new Product { Id ="SP000"+ i, Name = names[i - 1], Price = prices[i - 1], CreatedOn = DateTime.Now });
             }
             builder.HasData(data);
         }

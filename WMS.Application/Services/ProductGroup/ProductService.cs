@@ -41,7 +41,7 @@ namespace WMS.Application.Services.ProductGroup
             }
         }
 
-        public async Task<BaseResult> DeleteAsync(int id)
+        public async Task<BaseResult> DeleteAsync(string id)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace WMS.Application.Services.ProductGroup
                 return new BaseResult(message: ex.Message);
             }
         }
-        public async Task<BaseResult> RecoverAsync(int id)
+        public async Task<BaseResult> RecoverAsync(string id)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace WMS.Application.Services.ProductGroup
             }
         }
 
-        public async Task<BaseResult<Product>> FindAsync(int id)
+        public async Task<BaseResult<Product>> FindAsync(string id)
         {
             var result = await _unitOfWork.ProductRepository.FindAsync(id);
             if (result != null)

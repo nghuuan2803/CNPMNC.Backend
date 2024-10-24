@@ -16,7 +16,7 @@ namespace WMS.Domain.Entities.Activities
 
         public int InventoryCheckId { get; set; } //FK
 
-        public int ProductId { get; set; } //FK
+        public string ProductId { get; set; } //FK
 
         public InventoryCheck? InventoryCheck { get; set; }
 

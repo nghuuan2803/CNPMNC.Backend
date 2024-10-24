@@ -10,8 +10,8 @@ namespace WMS.Domain.Entities.Activities
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
 
-        public int ImportId { get; set; }//FK
-        public int ProductId { get; set; }//FK
+        public string ImportId { get; set; }//FK
+        public string ProductId { get; set; }//FK
 
         public Product? Product { get; set; }
         public Import? Import { get; set; }

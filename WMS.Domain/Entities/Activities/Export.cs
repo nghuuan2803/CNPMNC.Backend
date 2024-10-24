@@ -6,19 +6,18 @@ namespace WMS.Domain.Entities.Activities
 {
     public class Export : BaseEntity<int>
     {
-        //public string? OrderId { get; set; }
+        public string? InvoiceId { get; set; }
 
         public double Amount { get; set; }
 
         public ExportStatus Status { get; set; }
 
-
         [StringLength(200)]
         public string? Note { get; set; }
 
-        public DateTime? PaidDate { get; set; }
+        public string? InvoiceImage { get; set; }
 
-        public DateTime? CompletedDate { get; set; }
+        public DateTime? PaidDate { get; set; }
 
         public int AgencyId { get; set; } //FK 
 

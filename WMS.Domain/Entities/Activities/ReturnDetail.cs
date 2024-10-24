@@ -18,7 +18,7 @@ namespace WMS.Domain.Entities.Activities
 
         public int ReturnId { get; set; } //FK
 
-        public int ProductId { get; set; } //FK
+        public string ProductId { get; set; } //FK
 
         public Return Return { get; set; }
 

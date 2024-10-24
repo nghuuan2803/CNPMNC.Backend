@@ -40,7 +40,7 @@ namespace WMS.Application.DTOs.Requests.Activities
 
         public int ExportId { get; set; }
 
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public string? ProductName { get; set; }
 

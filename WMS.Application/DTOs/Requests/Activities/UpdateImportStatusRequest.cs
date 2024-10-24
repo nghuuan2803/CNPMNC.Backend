@@ -4,7 +4,7 @@ namespace WMS.Application.DTOs.Requests.Activities
 {
     public class UpdateImportStatusRequest
     {
-        public int ImportId { get; set; }
-        public ImportStatus NewStatus { get; set; }
+        public string ImportId { get; set; }
+        public bool NewStatus { get; set; }
     }
 }

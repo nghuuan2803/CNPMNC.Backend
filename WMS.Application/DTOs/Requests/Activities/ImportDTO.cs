@@ -4,7 +4,7 @@ namespace WMS.Application.DTOs.Requests.Activities
 {
     public class ImportDTO
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public string? CreatedBy { get; set; }
@@ -12,15 +12,11 @@ namespace WMS.Application.DTOs.Requests.Activities
         public string? ModifiedBy { get; set; }
         public double Amount { get; set; }
 
-        public ImportStatus Status { get; set; }
-
-        public DateTime? CompletedDate { get; set; }
-
         //[StringLength(200)]
         public string? Note { get; set; }
 
         //[StringLength(10)]
-        public string? OrderBy { get; set; }
+        public string OrderBy { get; set; }
 
         public int SuplierId { get; set; }
 
@@ -33,6 +29,12 @@ namespace WMS.Application.DTOs.Requests.Activities
         public string? ManagerName { get; set; }
 
         public ICollection<ImportItem>? Items { get; set; }
+
+        public string? InvoiceImage { get; set; }
+
+        public bool CheckPassed { get; set; } = true;
+
+        public DateTime? PaidDate { get; set; }
     }
     public class ImportItem
     {
@@ -40,8 +42,8 @@ namespace WMS.Application.DTOs.Requests.Activities
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
 
-        public int ImportId { get; set; }
-        public int ProductId { get; set; }
+        public string ImportId { get; set; }
+        public string ProductId { get; set; }
         public string? ProductName { get; set; }
         public string? Photo { get; set; }
     }

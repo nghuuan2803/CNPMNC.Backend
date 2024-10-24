@@ -2,7 +2,7 @@
 
 namespace WMS.Domain.Abstracts.Activities
 {
-    public interface IImportRepository : IBaseRepository<Import,int>
+    public interface IImportRepository : IBaseRepository<Import,string>
     {
     }
 }

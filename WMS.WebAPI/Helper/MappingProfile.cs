@@ -18,12 +18,17 @@ namespace WMS.WebAPI.Helper
             //    .ForMember(dest => dest.NormalizeUsername, opt => opt.MapFrom(src => src.Username.ToUpper()))
             //    .ForMember(dest => dest.NormalizeEmail, opt => opt.MapFrom(src => src.Username.ToUpper()));
 
-            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Product, ProductDetails>().ReverseMap();
             CreateMap<Agency, AgencyDTO>().ReverseMap();
             CreateMap<Employee, EmployeeDTO>().ReverseMap();
             CreateMap<Warehouse, WarehouseDTO>().ReverseMap();
             CreateMap<Suplier, SuplierDTO>().ReverseMap();
             CreateMap<Brand, BrandDTO>().ReverseMap();
+            CreateMap<Product, ProductDTO>()
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Brand.Name));
+
+            CreateMap<ProductDTO, Product>();
 
             CreateMap<Import, ImportDTO>()
             .ForMember(dest => dest.WarehouseName, opt => opt.MapFrom(src => src.Warehouse.Name))

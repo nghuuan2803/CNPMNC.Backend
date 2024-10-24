@@ -4,11 +4,13 @@ namespace WMS.Application.DTOs.Requests.ProductGroup
 {
     public class ProductDTO
     {        
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
         
         public double Price { get; set; }
+
+        public double ImportPrice { get; set; }
 
         public int Quantity { get; set; }
 
@@ -18,7 +20,11 @@ namespace WMS.Application.DTOs.Requests.ProductGroup
 
         public int CategoryId { get; set; }
 
+        public string CategoryName { get; set; }
+
         public int BrandId { get; set; }
+
+        public string BrandName { get; set; }
 
         public bool Discontinued { get; set; }
 

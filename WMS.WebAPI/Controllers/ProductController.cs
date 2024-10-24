@@ -2,7 +2,6 @@
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using WMS.Application.DTOs.Requests.ProductGroup;
 using WMS.Application.DTOs.Responses;
 using WMS.Application.Interfaces;
@@ -17,15 +16,15 @@ namespace WMS.WebAPI.Controllers
     //[Authorize(Roles ="admin")]
     public class ProductController(IProductService service, IMapper mapper, HttpClient _httpClient) : ControllerBase
     {
-        private readonly string _imgurClientId = "your_imgur_client_id";
+        private readonly string _imgurClientId = "Client-ID 157611a9fc2c121";
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
+        public async Task<ActionResult> GetById(string id)
         {
             var result = await service.FindAsync(id);
             if (result.Succeeded)
-                return Ok(new BaseResponse<Product>(data: result.Data!, result.Message!));
+                return Ok(new BaseResponse<ProductDetails>(data: mapper.Map<ProductDetails>(result.Data), result.Message!));
             return BadRequest(new { message = result.Message });
         }
         [HttpGet("get-all")]
@@ -69,7 +68,7 @@ namespace WMS.WebAPI.Controllers
 
                 // Upload ảnh lên Imgur
                 using var client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Authorization", "Client-ID 157611a9fc2c121");
+                client.DefaultRequestHeaders.Add("Authorization", _imgurClientId);
                 using var content = new MultipartFormDataContent();
                 content.Add(new ByteArrayContent(resizedImage), "image", model.ImageFile.FileName);
 
@@ -115,7 +114,7 @@ namespace WMS.WebAPI.Controllers
             return BadRequest(new { message = result.Message });
         }
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
             var result = await service.DeleteAsync(id);
             if (result.Succeeded)
@@ -123,7 +122,7 @@ namespace WMS.WebAPI.Controllers
             return BadRequest(new { message = result.Message });
         }
         [HttpPut("recover")]
-        public async Task<ActionResult> Recover([FromBody] int id)
+        public async Task<ActionResult> Recover([FromBody] string id)
         {
             var result = await service.RecoverAsync(id);
             if (result.Succeeded)
@@ -167,7 +166,7 @@ namespace WMS.WebAPI.Controllers
 
 
         [HttpPost("upload-image")]
-        public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        public async Task<IActionResult> UploadImage(IFormFile file)
         {
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
