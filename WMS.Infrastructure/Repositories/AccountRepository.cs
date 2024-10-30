@@ -12,6 +12,7 @@ using WMS.Application.DTOs.Responses;
 using WMS.Application.DTOs.Responses.Account;
 using WMS.Application.Extensions;
 using WMS.Application.Interfaces;
+using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.Authentication;
 using WMS.Infrastructure.Data;
 
@@ -22,11 +23,23 @@ namespace WMS.Infrastructure.Repositories
         UserManager<User> userManager,
         SignInManager<User> signInManager,
         IConfiguration config,
-        AppDbContext context) : IAccountService
+        AppDbContext context,
+        IUnitOfWork unitOfWork) : IAccountService
     {
 
         private async Task<User> FindUserByEmailAsync(string email)
-            => await userManager.FindByEmailAsync(email);
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user.AgencyId != null)
+            {
+                user.Agency = await unitOfWork.AgencyRepository.FindAsync((int)user.AgencyId);
+            }
+            else
+            {
+                user.Employee = await unitOfWork.EmployeeRepository.FindAsync(user.EmployeeId);
+            }
+            return user;
+        }
 
         private async Task<IdentityRole> FindRoleByNameAsync(string roleName)
             => await roleManager.FindByNameAsync(roleName);
@@ -39,12 +52,27 @@ namespace WMS.Infrastructure.Repositories
             {
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]!));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-                var userClaim = new Claim[]
+                Claim[] userClaim;
+
+                if (user.AgencyId != null)
                 {
-                    new Claim(ClaimTypes.Name, user.Email),
+
+                    userClaim = new Claim[]
+                    {
+                    new Claim(ClaimTypes.Name, user.AgencyId.ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, (await userManager.GetRolesAsync(user)).FirstOrDefault().ToString())
-                };
+                    };
+                }
+                else
+                {
+                    userClaim = new Claim[]
+                    {
+                    new Claim(ClaimTypes.Name, user.Employee.Id),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, (await userManager.GetRolesAsync(user)).FirstOrDefault().ToString())
+                    };
+                }
 
                 var token = new JwtSecurityToken(
                     issuer: config["JWT:Issuer"]!,
@@ -122,13 +150,14 @@ namespace WMS.Infrastructure.Repositories
                 return new GeneralResponse(false, ex.Message);
             }
         }
-        public async Task<LoginResponse> LoginAsync(LoginDTO model)
+
+        public async Task<EmployeeLoginResponse> LoginAsync(LoginDTO model)
         {
             try
             {
                 var user = await FindUserByEmailAsync(model.Email);
                 if (user is null)
-                    return new LoginResponse(false, "Tên đăng nhập không tồn tại!");
+                    return new EmployeeLoginResponse(false, "Tên đăng nhập không tồn tại!");
                 SignInResult result;
                 try
                 {
@@ -136,27 +165,65 @@ namespace WMS.Infrastructure.Repositories
                 }
                 catch (Exception)
                 {
-                    return new LoginResponse(false, "Mật khẩu không chính xác");
+                    return new EmployeeLoginResponse(false, "Mật khẩu không chính xác");
                 }
                 if (!result.Succeeded)
-                    return new LoginResponse(false, "Mật khẩu không chính xác");
+                    return new EmployeeLoginResponse(false, "Mật khẩu không chính xác");
 
                 string jwtToken = await GenerateTokenAsync(user);
                 string refreshToken = GenerateRefreshToken();
                 if (string.IsNullOrEmpty(jwtToken) || string.IsNullOrEmpty(refreshToken))
-                    return new LoginResponse(false, "Đã xảy ra lỗi, vui lòng liên hệ quản trị hệ thống!");
+                    return new EmployeeLoginResponse(false, "Đã xảy ra lỗi, vui lòng liên hệ quản trị hệ thống!");
                 else
                 {
                     var saveResult = await SaveRefreshToken(user.Id, refreshToken);
                     if (saveResult.Succeeded)
-                        return new LoginResponse(true, $"{user.UserName} đã đăng nhập thành công", jwtToken, refreshToken);
+                        return new EmployeeLoginResponse(true, $"{user.UserName} đã đăng nhập thành công", jwtToken, refreshToken, user.EmployeeId);
                     else
-                        return new LoginResponse();
+                        return new EmployeeLoginResponse();
                 }
             }
             catch (Exception ex)
             {
-                return new LoginResponse(false, ex.Message);
+                return new EmployeeLoginResponse(false, ex.Message);
+            }
+        }
+
+        public async Task<AgencyLoginResponse> AgencyLoginAsync(LoginDTO model)
+        {
+            try
+            {
+                var user = await FindUserByEmailAsync(model.Email);
+                if (user is null)
+                    return new AgencyLoginResponse(false, "Tên đăng nhập không tồn tại!");
+                SignInResult result;
+                try
+                {
+                    result = await signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                }
+                catch (Exception)
+                {
+                    return new AgencyLoginResponse(false, "Mật khẩu không chính xác");
+                }
+                if (!result.Succeeded)
+                    return new AgencyLoginResponse(false, "Mật khẩu không chính xác");
+
+                string jwtToken = await GenerateTokenAsync(user);
+                string refreshToken = GenerateRefreshToken();
+                if (string.IsNullOrEmpty(jwtToken) || string.IsNullOrEmpty(refreshToken))
+                    return new AgencyLoginResponse(false, "Đã xảy ra lỗi, vui lòng liên hệ quản trị hệ thống!");
+                else
+                {
+                    var saveResult = await SaveRefreshToken(user.Id, refreshToken);
+                    if (saveResult.Succeeded)
+                        return new AgencyLoginResponse(true, $"{user.UserName} đã đăng nhập thành công", jwtToken, refreshToken, user.AgencyId);
+                    else
+                        return new AgencyLoginResponse();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new AgencyLoginResponse(false, ex.Message);
             }
         }
 
@@ -244,6 +311,42 @@ namespace WMS.Infrastructure.Repositories
         public Task LogOut()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<EmployeeLoginResponse> LoginByRfid(string rfid)
+        {
+            try
+            {
+                var user = await context.Users.SingleOrDefaultAsync(p => p.Rfid == rfid);
+                if (user is null)
+                    return new EmployeeLoginResponse(false, "Tài khoản không tồn tại!");
+
+                if (user.AgencyId != null)
+                {
+                    user.Agency = await unitOfWork.AgencyRepository.FindAsync((int)user.AgencyId);
+                }
+                else
+                {
+                    user.Employee = await unitOfWork.EmployeeRepository.FindAsync(user.EmployeeId);
+                }
+
+                string jwtToken = await GenerateTokenAsync(user);
+                string refreshToken = GenerateRefreshToken();
+                if (string.IsNullOrEmpty(jwtToken) || string.IsNullOrEmpty(refreshToken))
+                    return new EmployeeLoginResponse(false, "Đã xảy ra lỗi, vui lòng liên hệ quản trị hệ thống!");
+                else
+                {
+                    var saveResult = await SaveRefreshToken(user.Id, refreshToken);
+                    if (saveResult.Succeeded)
+                        return new EmployeeLoginResponse(true, $"{user.UserName} đã đăng nhập thành công", jwtToken, refreshToken, user.EmployeeId);
+                    else
+                        return new EmployeeLoginResponse();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new EmployeeLoginResponse(false, ex.Message);
+            }
         }
     }
 }

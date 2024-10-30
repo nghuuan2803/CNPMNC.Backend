@@ -6,11 +6,6 @@ using WMS.Domain.Entities.Locations;
 using WMS.Domain.Entities.Activities;
 using WMS.Domain.Entities.Organization;
 using WMS.Domain.Entities.ProductGroup;
-using WMS.Infrastructure.Data.EntitiesConfiguration.Activities;
-using WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup;
-using WMS.Infrastructure.Data.EntitiesConfiguration.Location;
-using WMS.Infrastructure.Data.EntitiesConfiguration.Organization;
-using WMS.Infrastructure.Data.EntitiesConfiguration.Auth;
 using Microsoft.AspNetCore.Identity;
 
 namespace WMS.Infrastructure.Data
@@ -42,10 +37,13 @@ namespace WMS.Infrastructure.Data
         public DbSet<Return> Returns { get; set; } //13
         public DbSet<ReturnDetail> ReturnDetails { get; set; } //14
         public DbSet<InventoryCheck> InventoryChecks { get; set; } //15
-        public DbSet<CheckDetail> CheckDetails { get; set; } //16
         //Organization
-        public DbSet<Employee> Employees { get; set; } //17
-        public DbSet<Agency> Agencies { get; set; } //18
+        public DbSet<Employee> Employees { get; set; } //16
+        public DbSet<Agency> Agencies { get; set; } //17
+
+        public DbSet<Item> Items { get; set; } //18
+        public DbSet<Merge> Merges { get; set; } //19
+        public DbSet<Notification> Notifications { get; set; } //19
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -60,35 +58,35 @@ namespace WMS.Infrastructure.Data
                 Id = Guid.NewGuid().ToString(),
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                Email = "nghuuan2803@gmail.com",
-                NormalizedEmail = "nghuuan2803@gmail.com".ToUpper(),
+                Email = "admin@gmail.com",
+                NormalizedEmail = "admin@gmail.com".ToUpper(),
                 AccessFailedCount = 0
             };
-            var superManager = new User
+            var manager = new User
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "supermanager",
-                NormalizedUserName = "supermanager".ToUpper(),
-                Email = "anhuu2803@gmail.com",
-                NormalizedEmail = "anhuu2803@gmail.com".ToUpper(),
+                UserName = "manager",
+                NormalizedUserName = "manager".ToUpper(),
+                Email = "manager@gmail.com",
+                NormalizedEmail = "manager@gmail.com".ToUpper(),
                 AccessFailedCount = 0
             };
-            var branchManager = new User
+            var keeper = new User
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "branchmanager",
-                NormalizedUserName = "branchmanager".ToUpper(),
-                Email = "huuann28@gmail.com",
-                NormalizedEmail = "huuann28@gmail.com".ToUpper(),
+                UserName = "keeper",
+                NormalizedUserName = "keeper".ToUpper(),
+                Email = "keeper@gmail.com",
+                NormalizedEmail = "keeper@gmail.com".ToUpper(),
                 AccessFailedCount = 0
             };
             var agency = new User
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = "agency",
-                NormalizedUserName = "agency".ToUpper(),
-                Email = "an2831998@gmail.com",
-                NormalizedEmail = "an2831998@gmail.com".ToUpper(),
+                UserName = "agency1",
+                NormalizedUserName = "agency1".ToUpper(),
+                Email = "agency1@gmail.com",
+                NormalizedEmail = "agency1@gmail.com".ToUpper(),
                 AccessFailedCount = 0
             };
             var accountant = new User
@@ -96,24 +94,24 @@ namespace WMS.Infrastructure.Data
                 Id = Guid.NewGuid().ToString(),
                 UserName = "accountant",
                 NormalizedUserName = "accountant".ToUpper(),
-                Email = "abcde@gmail.com",
-                NormalizedEmail = "abcde@gmail.com".ToUpper(),
+                Email = "accountant@gmail.com",
+                NormalizedEmail = "accountant@gmail.com".ToUpper(),
                 AccessFailedCount = 0
             };
             var passwordHasher = new PasswordHasher<User>();
             admin.PasswordHash = passwordHasher.HashPassword(admin, "123123");
-            superManager.PasswordHash = passwordHasher.HashPassword(superManager, "123123");
-            branchManager.PasswordHash = passwordHasher.HashPassword(branchManager, "123123");
+            manager.PasswordHash = passwordHasher.HashPassword(manager, "123123");
+            keeper.PasswordHash = passwordHasher.HashPassword(keeper, "123123");
             agency.PasswordHash = passwordHasher.HashPassword(agency, "123123");
             accountant.PasswordHash = passwordHasher.HashPassword(accountant, "123123");
 
             builder.Entity<User>().HasData(admin);
-            builder.Entity<User>().HasData(superManager);
-            builder.Entity<User>().HasData(branchManager);
+            builder.Entity<User>().HasData(manager);
+            builder.Entity<User>().HasData(keeper);
             builder.Entity<User>().HasData(agency);
             builder.Entity<User>().HasData(accountant);
 
-            var admRole = new IdentityRole
+            var adminRole = new IdentityRole
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = "admin",
@@ -122,8 +120,8 @@ namespace WMS.Infrastructure.Data
             var managerRole = new IdentityRole
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "supermanager",
-                NormalizedName = "supermanager".ToUpper(),
+                Name = "manager",
+                NormalizedName = "manager".ToUpper(),
             };
             var agencyRole = new IdentityRole
             {
@@ -132,11 +130,11 @@ namespace WMS.Infrastructure.Data
                 NormalizedName = "agency".ToUpper(),
             };
 
-            var brmanagerRole = new IdentityRole
+            var keeperRole = new IdentityRole
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = "branchManager",
-                NormalizedName = "branchManager".ToUpper(),
+                Name = "keeper",
+                NormalizedName = "keeper".ToUpper(),
             };
             var accountantRole = new IdentityRole
             {
@@ -145,26 +143,26 @@ namespace WMS.Infrastructure.Data
                 NormalizedName = "accountant".ToUpper(),
             };
 
-            builder.Entity<IdentityRole>().HasData(admRole);
+            builder.Entity<IdentityRole>().HasData(adminRole);
             builder.Entity<IdentityRole>().HasData(managerRole);
             builder.Entity<IdentityRole>().HasData(agencyRole);
-            builder.Entity<IdentityRole>().HasData(brmanagerRole);
+            builder.Entity<IdentityRole>().HasData(keeperRole);
             builder.Entity<IdentityRole>().HasData(accountantRole);
 
-            var adminRole = new IdentityUserRole<string>
+            var admRole = new IdentityUserRole<string>
             {
-                RoleId = admRole.Id,
+                RoleId = adminRole.Id,
                 UserId = admin.Id
             };
             var mngRole = new IdentityUserRole<string>
             {
                 RoleId = managerRole.Id,
-                UserId = superManager.Id
+                UserId = manager.Id
             };
-            var brmngRole = new IdentityUserRole<string>
+            var kpRole = new IdentityUserRole<string>
             {
-                RoleId = brmanagerRole.Id,
-                UserId = branchManager.Id
+                RoleId = keeperRole.Id,
+                UserId = keeper.Id
             };
             var agcRole = new IdentityUserRole<string>
             {
@@ -176,9 +174,9 @@ namespace WMS.Infrastructure.Data
                 RoleId = accountantRole.Id,
                 UserId = accountant.Id
             };
-            builder.Entity<IdentityUserRole<string>>().HasData(adminRole);
+            builder.Entity<IdentityUserRole<string>>().HasData(admRole);
             builder.Entity<IdentityUserRole<string>>().HasData(mngRole);
-            builder.Entity<IdentityUserRole<string>>().HasData(brmngRole);
+            builder.Entity<IdentityUserRole<string>>().HasData(kpRole);
             builder.Entity<IdentityUserRole<string>>().HasData(agcRole);
             builder.Entity<IdentityUserRole<string>>().HasData(actRole);
         }

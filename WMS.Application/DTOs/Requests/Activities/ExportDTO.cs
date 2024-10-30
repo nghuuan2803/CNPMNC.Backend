@@ -6,6 +6,8 @@ namespace WMS.Application.DTOs.Requests.Activities
     {
         public int Id { get; set; }
 
+        public string? InvoiceId { get; set; }
+
         public double Amount { get; set; }
 
         public ExportStatus Status { get; set; }
@@ -17,14 +19,18 @@ namespace WMS.Application.DTOs.Requests.Activities
 
         public DateTime? PaidDate { get; set; }
 
+        public DateTime? ExportDate { get; set; }
+
         public DateTime? CompletedDate { get; set; }
+
+        public string OrderBy { get; set; }
 
         public int AgencyId { get; set; }
 
         public string? AgencyName { get; set; }
 
         //[StringLength(10)]
-        public string ManagerId { get; set; }
+        public string? ManagerId { get; set; }
 
         public string? ManagerName { get; set; }
 

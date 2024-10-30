@@ -8,7 +8,7 @@ namespace WMS.Domain.Entities.Activities
     {
         public int Id { get; set; }
 
-        public DateTime MergeDate { get; set; }
+        public DateTime CreateOn { get; set; }
 
         public string From { get; set; }
         public Warehouse Src { get; set; }
@@ -23,7 +23,8 @@ namespace WMS.Domain.Entities.Activities
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
-
         public string? Note { get; set; }
+        bool IsCanceled { get; set; }
+
     }
 }

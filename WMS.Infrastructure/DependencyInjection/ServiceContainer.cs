@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WMS.Application.Interfaces;
+using WMS.Application.Services;
 using WMS.Application.Services.Activities;
 using WMS.Application.Services.Loacation;
 using WMS.Application.Services.Organization;
@@ -55,6 +56,9 @@ namespace WMS.Infrastructure.DependencyInjection
             services.AddScoped<ISuplierService, SuplierService>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IInventoryService, InventoryService>();
+            services.AddScoped<IScanService, ScanService>();
+            services.AddScoped<INotifyService, NotifyService>();
         }
     }
 }

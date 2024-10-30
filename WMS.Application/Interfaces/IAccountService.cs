@@ -8,12 +8,14 @@ namespace WMS.Application.Interfaces
     {
         Task CreateAdminAsync();
         Task<GeneralResponse> CreateAccountAsync(CreateAccountDTO model);
-        Task<LoginResponse> LoginAsync(LoginDTO model);
+        Task<EmployeeLoginResponse> LoginAsync(LoginDTO model);
+        Task<AgencyLoginResponse> AgencyLoginAsync(LoginDTO model);
         Task<GeneralResponse> CreateRoleAsync(CreateRoleDTO model);
         Task<IEnumerable<GetRoleDTO>> GetRolesAsync();
         Task<IEnumerable<GetUsersWithRoleDTO>> GetUsersWithRolesAsync();
         Task<GeneralResponse> ChangeUserRoleAsync(ChangeUserRoleDTO model);
         Task<LoginResponse> RefreshTokenAsync(RefreshTokenDTO model);
+        Task<EmployeeLoginResponse> LoginByRfid(string rfid);
         Task LogOut();
     }
 }

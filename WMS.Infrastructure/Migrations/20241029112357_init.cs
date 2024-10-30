@@ -153,6 +153,12 @@ namespace WMS.Infrastructure.Migrations
                     Id = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
+                    Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QRcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rfid = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Length = table.Column<double>(type: "float", nullable: false),
+                    Width = table.Column<double>(type: "float", nullable: false),
+                    Height = table.Column<double>(type: "float", nullable: false),
                     ImportPrice = table.Column<double>(type: "float", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Discontinued = table.Column<bool>(type: "bit", nullable: false),
@@ -236,6 +242,7 @@ namespace WMS.Infrastructure.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EmployeeId = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     AgencyId = table.Column<int>(type: "int", nullable: true),
+                    Rfid = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     UserName = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: true),
                     Email = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: true),
@@ -315,49 +322,6 @@ namespace WMS.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(40)", nullable: false),
-                    BatchId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Exported = table.Column<bool>(type: "bit", nullable: false),
-                    StockAt = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Item", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Item_Batches_Id",
-                        column: x => x.Id,
-                        principalTable: "Batches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CheckDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Result = table.Column<int>(type: "int", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InventoryCheckId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<string>(type: "varchar(10)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CheckDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CheckDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
@@ -374,6 +338,9 @@ namespace WMS.Infrastructure.Migrations
                     Salary = table.Column<double>(type: "float", nullable: false),
                     IdentityNumber = table.Column<string>(type: "varchar(12)", unicode: false, maxLength: 12, nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QRcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rfid = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WarehouseId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -392,8 +359,12 @@ namespace WMS.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QRcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rfid = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrderBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
+                    ExportDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     InvoiceImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -534,7 +505,7 @@ namespace WMS.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<string>(type: "varchar(10)", nullable: false),
-                    WarehouseId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
+                    WarehouseId = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -560,11 +531,13 @@ namespace WMS.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BeginDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProductId = table.Column<string>(type: "varchar(10)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Result = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReportDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    ActualQuantity = table.Column<int>(type: "int", nullable: false),
+                    AssigneeId = table.Column<string>(type: "varchar(10)", nullable: true),
                     ManagerId = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     WarehouseId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -576,11 +549,23 @@ namespace WMS.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_InventoryChecks", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_InventoryChecks_Employees_AssigneeId",
+                        column: x => x.AssigneeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_InventoryChecks_Employees_ManagerId",
                         column: x => x.ManagerId,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_InventoryChecks_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_InventoryChecks_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
@@ -590,12 +575,46 @@ namespace WMS.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Merge",
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BatchId = table.Column<string>(type: "varchar(40)", nullable: true),
+                    ProductId = table.Column<string>(type: "varchar(10)", nullable: false),
+                    Exported = table.Column<bool>(type: "bit", nullable: false),
+                    WarehouseId = table.Column<string>(type: "varchar(5)", nullable: true),
+                    Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QRcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rfid = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Items_Batches_BatchId",
+                        column: x => x.BatchId,
+                        principalTable: "Batches",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Items_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Items_Warehouses_WarehouseId",
+                        column: x => x.WarehouseId,
+                        principalTable: "Warehouses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Merges",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MergeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     From = table.Column<string>(type: "varchar(5)", nullable: false),
                     To = table.Column<string>(type: "varchar(5)", nullable: false),
                     CreatedBy = table.Column<string>(type: "varchar(10)", nullable: false),
@@ -605,26 +624,26 @@ namespace WMS.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Merge", x => x.Id);
+                    table.PrimaryKey("PK_Merges", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Merge_Employees_CreatedBy",
+                        name: "FK_Merges_Employees_CreatedBy",
                         column: x => x.CreatedBy,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Merge_Products_ProductId",
+                        name: "FK_Merges_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Merge_Warehouses_From",
+                        name: "FK_Merges_Warehouses_From",
                         column: x => x.From,
                         principalTable: "Warehouses",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Merge_Warehouses_To",
+                        name: "FK_Merges_Warehouses_To",
                         column: x => x.To,
                         principalTable: "Warehouses",
                         principalColumn: "Id");
@@ -741,23 +760,23 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "17cee6b0-f1b3-479a-a896-146ae598c50b", null, "admin", "ADMIN" },
-                    { "67720c0f-f08f-4d03-bb3f-56533aed370e", null, "branchManager", "BRANCHMANAGER" },
-                    { "83601cc7-c0de-4593-a48d-20a628eae27b", null, "supermanager", "SUPERMANAGER" },
-                    { "9f91751c-b626-48ac-aa0d-5f2b727f5457", null, "accountant", "ACCOUNTANT" },
-                    { "cdbc33d2-32e8-4d77-8e49-4639db15236e", null, "agency", "AGENCY" }
+                    { "424962f4-963a-45ca-ae2a-b3b59d2043e0", null, "keeper", "KEEPER" },
+                    { "4871a311-e7c2-45ac-81fa-107f0d2a9715", null, "agency", "AGENCY" },
+                    { "79ddcb7b-18b8-458f-8786-585397bcb2f4", null, "accountant", "ACCOUNTANT" },
+                    { "8a971cbf-d7ee-41e3-a77f-d297820f57db", null, "manager", "MANAGER" },
+                    { "cab07f4f-1baa-4317-9149-47af5e8c5b8a", null, "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "AgencyId", "ConcurrencyStamp", "CreatedOn", "Email", "EmailConfirmed", "EmployeeId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "AgencyId", "ConcurrencyStamp", "CreatedOn", "Email", "EmailConfirmed", "EmployeeId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Rfid", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3a99b1a0-447c-4dcc-8ee6-e4cac9d607f9", 0, null, "275db0f3-0802-4a2a-9742-db10145b80d5", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2472), "nghuuan2803@gmail.com", false, null, false, null, "NGHUUAN2803@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEPHFPXVzEnN3ZdFnOwF3A1sw39tHzgH2E6zI29dZYHF81Egf1s7ijLqidlLehCvX7g==", null, false, "82e0c077-a8e5-4cb2-b1a1-43ea673cf497", false, "admin" },
-                    { "4963eb73-4dcd-4a7c-8e3d-daedc4f1d32a", 0, null, "cc8bed05-56cd-416e-a963-06498c9f46e3", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2587), "anhuu2803@gmail.com", false, null, false, null, "ANHUU2803@GMAIL.COM", "SUPERMANAGER", "AQAAAAIAAYagAAAAEMsJmT4odOqjry3WcY3FktKUrYho8jrH5y/szGw8T5HcQOVtuHXiLFJNJqLhEDjeqQ==", null, false, "45a08423-a6a6-4215-b44b-132165e80f55", false, "supermanager" },
-                    { "57e7dbef-8217-484c-9d02-a87135d99ad5", 0, null, "57d30973-3493-4179-97d1-18d3ab6c1602", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2624), "abcde@gmail.com", false, null, false, null, "ABCDE@GMAIL.COM", "ACCOUNTANT", "AQAAAAIAAYagAAAAEFNSfJZQ4bfJloUY6GZNKNV5+l/TJokELKj3IZvE4vFEfHRiKI70sRiCt+RHdPk//g==", null, false, "1322af4b-769c-4d13-928c-ef725a9e46f7", false, "accountant" },
-                    { "b6c92e9a-cd07-44d8-a04c-e88f71043605", 0, null, "e4b7906f-5c88-49fd-9016-89cacab1fc0b", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2614), "an2831998@gmail.com", false, null, false, null, "AN2831998@GMAIL.COM", "AGENCY", "AQAAAAIAAYagAAAAEEkRbPXO1TUdK2x0qC5bT9IjLjBGRLHCggEbVZNw30qSVsMfhkPDvFDDPNP5VblEQA==", null, false, "59ef4b4d-0aab-4fe6-8d51-fb59b762b637", false, "agency" },
-                    { "dcc8e952-2c5f-4283-a6a5-e091125f0a6c", 0, null, "82cba0e7-6415-4da3-b440-0088577ebb3c", new DateTime(2024, 10, 24, 16, 57, 16, 181, DateTimeKind.Local).AddTicks(2601), "huuann28@gmail.com", false, null, false, null, "HUUANN28@GMAIL.COM", "BRANCHMANAGER", "AQAAAAIAAYagAAAAEJsaLXzjhBxsek9bgiqmpTdwcaPxeymrKI3pWBhHTeG3fqkk5QpiL67KgsbZwVeMqw==", null, false, "756e32bf-2b28-4bcb-86b4-0b0323f94c0d", false, "branchmanager" }
+                    { "34daefcc-2e8e-41b1-8ac7-b2675c73fd82", 0, null, "2ff4fb48-cac1-4176-b4c3-28aaf8018432", new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(4320), "manager@gmail.com", false, null, false, null, "MANAGER@GMAIL.COM", "MANAGER", "AQAAAAIAAYagAAAAEB8+0TB/Lb/xw0rfEk+W2hVOtT0h/eKoRXG0JAyC94O2lwcFV9gW6Yi4Gn+Rdxp4vg==", null, false, null, "8a301944-bffc-419e-ae6b-0a7607c339b9", false, "manager" },
+                    { "8a780762-d101-4f56-a211-ffea5ee38ba1", 0, null, "fd0ce055-951e-4724-9c0a-d67c2faeda91", new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(4358), "accountant@gmail.com", false, null, false, null, "ACCOUNTANT@GMAIL.COM", "ACCOUNTANT", "AQAAAAIAAYagAAAAEMuqUKqOudHoiecgFMBB8Zc/pno8uri9h7q/Yz5hAYrUdP+5Z840v5DdAqpRVdJtqA==", null, false, null, "371c27a1-a7eb-4702-aa6f-e52116e2e9f0", false, "accountant" },
+                    { "964da110-c58e-4712-8444-78431873c0f2", 0, null, "32c91b75-63af-4884-9767-afd63081f72c", new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(4348), "agency1@gmail.com", false, null, false, null, "AGENCY1@GMAIL.COM", "AGENCY1", "AQAAAAIAAYagAAAAEDVIvacK9g5j9a6voepFtFjg5O1d93VTDe3cx3Rxcgo4WnaufNRYdsFjIaVLZJ7FyQ==", null, false, null, "b888ce72-7991-4756-ac8a-e5eaefda9b06", false, "agency1" },
+                    { "a55364a8-6367-42b6-b2f1-6d4cfa0adef2", 0, null, "99c5b975-fbd5-43fe-942e-e8824a80a0a9", new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(4216), "admin@gmail.com", false, null, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEKws54AQQ7+lJiTBXw7A8NFTyfHVRus8JSgFtPHdE+Of1wwF8OtbdanuPFpVe/F9XA==", null, false, null, "26c2857b-6c43-4958-ab8b-49421ddcc39d", false, "admin" },
+                    { "e6ce47a8-5fcd-49a2-8913-f4b0b6e5c354", 0, null, "e740c2af-72a2-4f52-81ca-99b0e85aa97a", new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(4339), "keeper@gmail.com", false, null, false, null, "KEEPER@GMAIL.COM", "KEEPER", "AQAAAAIAAYagAAAAEHZlj4slvzM3/Qo6eaXvztARdihv9qKiNwayNGWXxo/0YpNy5EGZU1aUQK2toFz0GA==", null, false, null, "bf3e6231-211a-4682-b95d-545aaf928f52", false, "keeper" }
                 });
 
             migrationBuilder.InsertData(
@@ -809,17 +828,17 @@ namespace WMS.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BrandId", "CategoryId", "CreatedBy", "CreatedOn", "Deleted", "Description", "Discontinued", "ImportPrice", "ModifiedBy", "ModifiedOn", "Name", "Photo", "Price", "Quantity" },
+                columns: new[] { "Id", "Barcode", "BrandId", "CategoryId", "CreatedBy", "CreatedOn", "Deleted", "Description", "Discontinued", "Height", "ImportPrice", "Length", "ModifiedBy", "ModifiedOn", "Name", "Photo", "Price", "QRcode", "Quantity", "Rfid", "Width" },
                 values: new object[,]
                 {
-                    { "SP0001", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8968), false, null, false, 0.0, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, 0 },
-                    { "SP0002", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8988), false, null, false, 0.0, null, null, "Sony Bravia OLED SN101", null, 15000000.0, 0 },
-                    { "SP0003", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8989), false, null, false, 0.0, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, 0 },
-                    { "SP0004", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8991), false, null, false, 0.0, null, null, "Sam Sung OLED SS115", null, 9000000.0, 0 },
-                    { "SP0005", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8993), false, null, false, 0.0, null, null, "Điều hòa Panasonic siêu mát lạnh", null, 6000000.0, 0 },
-                    { "SP0006", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8997), false, null, false, 0.0, null, null, "Máy lạnh Tosiba buốt giá con tim", null, 5000000.0, 0 },
-                    { "SP0007", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(8998), false, null, false, 0.0, null, null, "Tủ lạnh LG GG", null, 7000000.0, 0 },
-                    { "SP0008", null, null, null, new DateTime(2024, 10, 24, 16, 57, 16, 180, DateTimeKind.Local).AddTicks(9000), false, null, false, 0.0, null, null, "Máy giặt AQUA ảo quá", null, 8000000.0, 0 }
+                    { "SP0001", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1779), false, null, false, 1.0, 0.0, 1.0, null, null, "Sony Bravia QLED SQ101", null, 10000000.0, null, 0, null, 1.0 },
+                    { "SP0002", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1802), false, null, false, 1.0, 0.0, 1.0, null, null, "Sony Bravia OLED SN101", null, 15000000.0, null, 0, null, 1.0 },
+                    { "SP0003", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1804), false, null, false, 1.0, 0.0, 1.0, null, null, "Sam Sung QLED SSQ113", null, 12000000.0, null, 0, null, 1.0 },
+                    { "SP0004", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1806), false, null, false, 1.0, 0.0, 1.0, null, null, "Sam Sung OLED SS115", null, 9000000.0, null, 0, null, 1.0 },
+                    { "SP0005", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1808), false, null, false, 1.0, 0.0, 1.0, null, null, "Điều hòa Panasonic PA001", null, 6000000.0, null, 0, null, 1.0 },
+                    { "SP0006", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1812), false, null, false, 1.0, 0.0, 1.0, null, null, "Máy lạnh Tosiba TSO 7", null, 5000000.0, null, 0, null, 1.0 },
+                    { "SP0007", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1813), false, null, false, 1.0, 0.0, 1.0, null, null, "Tủ lạnh LG GG X35", null, 7000000.0, null, 0, null, 1.0 },
+                    { "SP0008", null, null, null, null, new DateTime(2024, 10, 29, 18, 23, 56, 208, DateTimeKind.Local).AddTicks(1815), false, null, false, 1.0, 0.0, 1.0, null, null, "Máy giặt AQUA Model 9", null, 8000000.0, null, 0, null, 1.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -841,11 +860,11 @@ namespace WMS.Infrastructure.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "17cee6b0-f1b3-479a-a896-146ae598c50b", "3a99b1a0-447c-4dcc-8ee6-e4cac9d607f9" },
-                    { "83601cc7-c0de-4593-a48d-20a628eae27b", "4963eb73-4dcd-4a7c-8e3d-daedc4f1d32a" },
-                    { "9f91751c-b626-48ac-aa0d-5f2b727f5457", "57e7dbef-8217-484c-9d02-a87135d99ad5" },
-                    { "cdbc33d2-32e8-4d77-8e49-4639db15236e", "b6c92e9a-cd07-44d8-a04c-e88f71043605" },
-                    { "67720c0f-f08f-4d03-bb3f-56533aed370e", "dcc8e952-2c5f-4283-a6a5-e091125f0a6c" }
+                    { "8a971cbf-d7ee-41e3-a77f-d297820f57db", "34daefcc-2e8e-41b1-8ac7-b2675c73fd82" },
+                    { "79ddcb7b-18b8-458f-8786-585397bcb2f4", "8a780762-d101-4f56-a211-ffea5ee38ba1" },
+                    { "4871a311-e7c2-45ac-81fa-107f0d2a9715", "964da110-c58e-4712-8444-78431873c0f2" },
+                    { "cab07f4f-1baa-4317-9149-47af5e8c5b8a", "a55364a8-6367-42b6-b2f1-6d4cfa0adef2" },
+                    { "424962f4-963a-45ca-ae2a-b3b59d2043e0", "e6ce47a8-5fcd-49a2-8913-f4b0b6e5c354" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -917,16 +936,6 @@ namespace WMS.Infrastructure.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CheckDetails_InventoryCheckId",
-                table: "CheckDetails",
-                column: "InventoryCheckId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CheckDetails_ProductId",
-                table: "CheckDetails",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Employees_WarehouseId",
                 table: "Employees",
                 column: "WarehouseId");
@@ -992,9 +1001,19 @@ namespace WMS.Infrastructure.Migrations
                 column: "WarehouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InventoryChecks_AssigneeId",
+                table: "InventoryChecks",
+                column: "AssigneeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InventoryChecks_ManagerId",
                 table: "InventoryChecks",
                 column: "ManagerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryChecks_ProductId",
+                table: "InventoryChecks",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryChecks_WarehouseId",
@@ -1002,23 +1021,38 @@ namespace WMS.Infrastructure.Migrations
                 column: "WarehouseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Merge_CreatedBy",
-                table: "Merge",
-                column: "CreatedBy");
+                name: "IX_Items_BatchId",
+                table: "Items",
+                column: "BatchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Merge_From",
-                table: "Merge",
-                column: "From");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Merge_ProductId",
-                table: "Merge",
+                name: "IX_Items_ProductId",
+                table: "Items",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Merge_To",
-                table: "Merge",
+                name: "IX_Items_WarehouseId",
+                table: "Items",
+                column: "WarehouseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Merges_CreatedBy",
+                table: "Merges",
+                column: "CreatedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Merges_From",
+                table: "Merges",
+                column: "From");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Merges_ProductId",
+                table: "Merges",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Merges_To",
+                table: "Merges",
                 column: "To");
 
             migrationBuilder.CreateIndex(
@@ -1108,14 +1142,6 @@ namespace WMS.Infrastructure.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CheckDetails_InventoryChecks_InventoryCheckId",
-                table: "CheckDetails",
-                column: "InventoryCheckId",
-                principalTable: "InventoryChecks",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Employees_Warehouses_WarehouseId",
                 table: "Employees",
                 column: "WarehouseId",
@@ -1147,9 +1173,6 @@ namespace WMS.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CheckDetails");
-
-            migrationBuilder.DropTable(
                 name: "ExportDetails");
 
             migrationBuilder.DropTable(
@@ -1159,10 +1182,13 @@ namespace WMS.Infrastructure.Migrations
                 name: "Inventories");
 
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "InventoryChecks");
 
             migrationBuilder.DropTable(
-                name: "Merge");
+                name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "Merges");
 
             migrationBuilder.DropTable(
                 name: "RefreshTokens");
@@ -1175,9 +1201,6 @@ namespace WMS.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "InventoryChecks");
 
             migrationBuilder.DropTable(
                 name: "Batches");

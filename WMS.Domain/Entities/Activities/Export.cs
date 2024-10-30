@@ -8,9 +8,15 @@ namespace WMS.Domain.Entities.Activities
     {
         public string? InvoiceId { get; set; }
 
+        public string? Barcode { get; set; }
+        public string? QRcode { get; set; }
+        public string? Rfid { get; set; }
+
         public string OrderBy { get; set; }
 
         public double Amount { get; set; }
+
+        public DateTime? ExportDate { get; set; }
 
         public ExportStatus Status { get; set; }
 

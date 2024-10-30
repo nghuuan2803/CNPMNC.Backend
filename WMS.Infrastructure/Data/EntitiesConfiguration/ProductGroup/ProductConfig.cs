@@ -22,10 +22,10 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
                 "Sony Bravia OLED SN101",
                 "Sam Sung QLED SSQ113",
                 "Sam Sung OLED SS115",
-                "Điều hòa Panasonic siêu mát lạnh",
-                "Máy lạnh Tosiba buốt giá con tim",
-                "Tủ lạnh LG GG",
-                "Máy giặt AQUA ảo quá",
+                "Điều hòa Panasonic PA001",
+                "Máy lạnh Tosiba TSO 7",
+                "Tủ lạnh LG GG X35",
+                "Máy giặt AQUA Model 9",
             };
             double[] prices = { 10000000, 15000000, 12000000, 9000000, 6000000, 5000000, 7000000, 8000000 };
             var data = new List<Product>();

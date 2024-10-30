@@ -62,21 +62,36 @@ namespace WMS.Application.Services.Account
             throw new NotImplementedException();
         }
 
-        public async Task<LoginResponse> LoginAsync(LoginDTO model)
+        public async Task<EmployeeLoginResponse> LoginAsync(LoginDTO model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
-            {
-               
-                return new LoginResponse(Message: "Tài khoản không tồn tại!");
+            {               
+                return new EmployeeLoginResponse(Message: "Tài khoản không tồn tại!");
             }
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
             if (!result.Succeeded)
             {
-                return new LoginResponse(Message: "Mật khẩu không chính xác!");
+                return new EmployeeLoginResponse(Message: "Mật khẩu không chính xác!");
             }
             var token = await CreateTokenAsync(user);
-            return new LoginResponse(Message: "Đăng nhập thành công!",Token: token,Succeeded:true);
+            return new EmployeeLoginResponse(Message: "Đăng nhập thành công!",Token: token,Succeeded:true, EmployeeId: user.EmployeeId);
+        }
+
+        public async Task<AgencyLoginResponse> AgencyLoginAsync(LoginDTO model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return new AgencyLoginResponse(Message: "Tài khoản không tồn tại!");
+            }
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
+            if (!result.Succeeded)
+            {
+                return new AgencyLoginResponse(Message: "Mật khẩu không chính xác!");
+            }
+            var token = await CreateTokenAsync(user);
+            return new AgencyLoginResponse(Message: "Đăng nhập thành công!", Token: token, Succeeded: true, AgencyId: user.AgencyId);
         }
 
         public Task LogOut()
@@ -110,6 +125,11 @@ namespace WMS.Application.Services.Account
                 );
             var tokenHandler = new JwtSecurityTokenHandler().WriteToken(token);
             return tokenHandler;
+        }
+
+        public Task<EmployeeLoginResponse> LoginByRfid(string rfid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

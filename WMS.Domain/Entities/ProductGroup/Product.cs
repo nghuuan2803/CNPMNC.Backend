@@ -11,6 +11,15 @@ namespace WMS.Domain.Entities.ProductInfo
         [Range(0, 9000000000)]
         public double Price { get; set; }
 
+        public string? Barcode { get; set; }
+        public string? QRcode { get; set; }
+        public string? Rfid { get; set; }
+
+        public double Length { get; set; } = 1;
+        public double Width { get; set; } = 1;
+        public double Height { get; set; } = 1;
+
+
         [Range(0, 9000000000)]
         public double ImportPrice { get; set; }
 
@@ -33,5 +42,13 @@ namespace WMS.Domain.Entities.ProductInfo
         public Brand? Brand { get; set; }
 
         public ICollection<Inventory> Stocks { get; set; }
+
+
+
+        //methods
+        public double GetVolume()
+        {
+            return Length * Width * Height;
+        }
     }
 }

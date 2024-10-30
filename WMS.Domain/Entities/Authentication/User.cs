@@ -15,5 +15,8 @@ namespace WMS.Domain.Entities.Authentication
 
         public int? AgencyId { get; set; }
         public Agency? Agency { get; set; }
+
+        [StringLength(10)]
+        public string? Rfid { get; set; }
     }
 }

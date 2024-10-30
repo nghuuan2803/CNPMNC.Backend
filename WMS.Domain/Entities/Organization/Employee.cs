@@ -37,6 +37,11 @@ namespace WMS.Domain.Entities.Organization
 
         public EmployeeStatus Status { get; set; }
 
+
+        public string? Barcode { get; set; }
+        public string? QRcode { get; set; }
+        public string? Rfid { get; set; }
+
         [StringLength(5)]
         public string? WarehouseId { get; set; } //FK
 

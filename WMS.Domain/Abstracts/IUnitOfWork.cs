@@ -19,14 +19,15 @@ namespace WMS.Domain.Abstracts
         ISuplierRepository SuplierRepository { get; set; }
         IWarehouseRepository WarehouseRepository { get; set; }
         IInventoryCheckRepository InventoryCheckRepository { get; set; }
-        ICheckDetailRepository CheckDetailRepository { get; set; }
         IImportRepository ImportRepository { get; set; }
         IImportDetailRepository ImportDetailRepository { get; set; }
         IExportRepository ExportRepository { get; set; }
         IExportDetailRepository ExportDetailRepository { get; set; }
         IReturnRepository ReturnRepository { get; set; }
         IReturnDetailRepository ReturnDetailRepository { get; set; }
-
+        IItemRepository ItemRepository { get; set; }
+        IMergeRepository MergeRepository { get; set; }
+        INotifiyRepository NotifiyRepository { get; set; }
 
         Task BeginAsync();
         Task SaveAsync();

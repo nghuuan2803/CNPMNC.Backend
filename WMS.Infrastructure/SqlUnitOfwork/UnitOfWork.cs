@@ -6,6 +6,7 @@ using WMS.Domain.Abstracts.Organization;
 using WMS.Domain.Abstracts.ProductGroup;
 using WMS.Domain.Abstracts.ProductRepo;
 using WMS.Infrastructure.Data;
+using WMS.Infrastructure.Data.EntitiesConfiguration.Activities;
 using WMS.Infrastructure.Repositories.Activities;
 using WMS.Infrastructure.Repositories.Loaction;
 using WMS.Infrastructure.Repositories.Organization;
@@ -29,13 +30,15 @@ namespace WMS.Infrastructure.SqlsvUnitOfwork
         public ISuplierRepository SuplierRepository { get; set; } = new SuplierRepository(_db);
         public IWarehouseRepository WarehouseRepository { get; set; } = new WarehouseRepository(_db);
         public IInventoryCheckRepository InventoryCheckRepository { get; set; } = new InventoryCheckRepository(_db);
-        public ICheckDetailRepository CheckDetailRepository { get; set; } = new CheckDetailRepository(_db);
         public IImportRepository ImportRepository { get; set; } = new ImportRepository(_db);
         public IImportDetailRepository ImportDetailRepository { get; set; } = new ImportDetailRepository(_db);
         public IExportRepository ExportRepository { get; set; } = new ExportRepository(_db);
         public IExportDetailRepository ExportDetailRepository { get; set; } = new ExportDetailRepository(_db);
         public IReturnRepository ReturnRepository { get; set; } = new ReturnRepository(_db);
         public IReturnDetailRepository ReturnDetailRepository { get; set; } = new ReturnDetailRepository(_db);
+        public IItemRepository ItemRepository { get; set; } = new ItemRepository(_db);
+        public IMergeRepository MergeRepository { get; set; } = new MergeRepository(_db);
+        public INotifiyRepository NotifiyRepository { get; set; } = new NotifyRepository(_db);
 
         public async Task BeginAsync()
         {

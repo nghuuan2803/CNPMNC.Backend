@@ -3,10 +3,10 @@
     public enum ExportStatus
     {
         Pending,
-        Paid,
-        Completed,
         OrderCanceled,
         OrderRefuse,
+        InProgress,
+        Completed,
         Canceled
     }
 }

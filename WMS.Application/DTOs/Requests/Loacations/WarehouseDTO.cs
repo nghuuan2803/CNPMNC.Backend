@@ -17,6 +17,8 @@ namespace WMS.Application.DTOs.Requests.Loacations
         //[StringLength(10)]
         public string PhoneNumber { get; set; }
 
+        public string? KeeperName { get; set; }
+
         public CapacityStatus CapacityStatus { get; set; }
 
         public bool Discontinued { get; set; }

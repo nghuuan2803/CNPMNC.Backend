@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WMS.Application.DTOs.Requests;
 using WMS.Application.DTOs.Requests.Activities;
 using WMS.Application.Interfaces;
@@ -17,7 +19,7 @@ namespace WMS.WebAPI.Controllers
             var result = await service.GetDetailAsync(id);
             if (result.Succeeded)
             {
-                return Ok(result.Data);
+                return Ok(mapper.Map<ExportDTO>(result.Data));
             }
             return BadRequest(result);
         }
@@ -27,7 +29,7 @@ namespace WMS.WebAPI.Controllers
             var result = await service.GetDetailAsync(invoiceId);
             if (result.Succeeded)
             {
-                return Ok(result.Data);
+                return Ok(mapper.Map<ExportDTO>(result.Data));
             }
             return BadRequest(result);
         }
@@ -38,7 +40,7 @@ namespace WMS.WebAPI.Controllers
             var result = await service.HistoryListAsync(agencyId);
             if (result.Succeeded)
             {
-                return Ok(result.Data);
+                return Ok(mapper.Map<List<ExportDTO>>(result.Data));
             }
             return BadRequest(result);
         }
@@ -50,7 +52,7 @@ namespace WMS.WebAPI.Controllers
             var result = await service.GetListAsync();
             if (result.Succeeded)
             {
-                return Ok(result.Data);
+                return Ok(mapper.Map<List<ExportDTO>>(result.Data));
             }
             return BadRequest(result);
         }
@@ -66,6 +68,25 @@ namespace WMS.WebAPI.Controllers
                 return Ok(res);
             }
             return BadRequest(result.Message);
+        }
+        [HttpPost("Cancel")]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var result = await service.CancelAsync(id);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest(new { message = result.Message });
+        }
+        //cách lấy thông tin user từ jwt
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetUserInfo()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+            return Ok(new { UserId = userId, Email = userEmail });
         }
     }
 }

@@ -48,7 +48,10 @@ namespace WMS.WebAPI.Controllers
         {
             var result = await service.GetListAsync();
             if (result.Succeeded)
-                return Ok(new BaseResponse<IEnumerable<Warehouse>>(result.Data!, result.Message!));
+            {
+                var res = _mapper.Map<IEnumerable<WarehouseDTO>>(result.Data);
+                return Ok(new BaseResponse<IEnumerable<WarehouseDTO>>(res, result.Message!));
+            }
             return BadRequest(result.Message);
         }
 

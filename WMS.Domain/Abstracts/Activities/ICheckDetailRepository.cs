@@ -2,7 +2,4 @@
 
 namespace WMS.Domain.Abstracts.Activities
 {
-    public interface ICheckDetailRepository : IBaseRepository<CheckDetail, int>
-    {
-    }
 }

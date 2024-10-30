@@ -14,7 +14,7 @@ namespace WMS.Infrastructure.Data.EntitiesConfiguration.ProductGroup
             builder.HasOne(p => p.Product).WithMany().HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.Origin).WithMany().HasForeignKey(p => p.OriginId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(p => p.Import).WithMany().HasForeignKey(p => p.ImportId).OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(p => p.Items).WithOne(p=>p.Batch).HasForeignKey(p => p.Id);
+            //builder.HasMany(p => p.Items).WithOne(p=>p.Batch).HasForeignKey(p => p.Id);
         }
     }
 }

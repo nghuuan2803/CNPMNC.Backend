@@ -14,7 +14,7 @@ namespace WMS.WebAPI.Controllers
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await service.GetListAsync(null!);
+            var result = await service.GetAllAsync();
             if (result.Succeeded)
             {
                 var data = _mapper.Map<List<ExportDTO>>(result.Data);
@@ -33,6 +33,43 @@ namespace WMS.WebAPI.Controllers
                 return Ok(new BaseResponse<ExportDTO>(data, result.Message!));
             }
             return BadRequest(result.Message);
+        }
+
+        [HttpPost("approval")]
+        public async Task<IActionResult> ApprovalOrder(ExportDTO request)
+        {
+            var model = _mapper.Map<Export>(request);
+            var res = await service.ApprovalOrderAsync(model);
+            if (res.Succeeded)
+                return Ok(new BaseResponse<ExportDTO>(_mapper.Map<ExportDTO>(res.Data)));
+            return BadRequest();
+        }
+
+        [HttpPost("refuse")]
+        public async Task<IActionResult> RefuseOrder(int id)
+        {
+            var res = await service.RefuseOrderAsync(id);
+            if (res.Succeeded)
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost("complete")]
+        public async Task<IActionResult> Complete(int id)
+        {
+            var res = await service.CompleteAsync(id);
+            if (res.Succeeded)
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost("cancel")]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var res = await service.CancelAsync(id);
+            if (res.Succeeded)
+                return Ok();
+            return BadRequest();
         }
     }
 }

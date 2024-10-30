@@ -2,7 +2,6 @@
 {
     public enum CheckStatus
     {
-        Init,
         Pending,
         Processing,
         Completed,
