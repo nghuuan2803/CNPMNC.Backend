@@ -7,6 +7,8 @@ using WMS.Domain.Entities.Activities;
 using WMS.Domain.Entities.Organization;
 using WMS.Domain.Entities.ProductGroup;
 using Microsoft.AspNetCore.Identity;
+using WMS.Domain.Entities.Report;
+using WMS.Domain.Entities;
 
 namespace WMS.Infrastructure.Data
 {
@@ -44,6 +46,8 @@ namespace WMS.Infrastructure.Data
         public DbSet<Item> Items { get; set; } //18
         public DbSet<Merge> Merges { get; set; } //19
         public DbSet<Notification> Notifications { get; set; } //19
+        public DbSet<ImportReport> ImportReports { get; set; } //19
+        public DbSet<HtmlSignature> HtmlSignatures { get; set; } //19
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

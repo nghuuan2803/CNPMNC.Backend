@@ -11,10 +11,12 @@ using WMS.Application.Services.Activities;
 using WMS.Application.Services.Loacation;
 using WMS.Application.Services.Organization;
 using WMS.Application.Services.ProductGroup;
+using WMS.Application.Services.Report;
 using WMS.Domain.Abstracts;
 using WMS.Domain.Entities.Authentication;
 using WMS.Infrastructure.Data;
 using WMS.Infrastructure.Repositories;
+using WMS.Infrastructure.Repositories.Report;
 using WMS.Infrastructure.SqlsvUnitOfwork;
 
 namespace WMS.Infrastructure.DependencyInjection
@@ -59,6 +61,9 @@ namespace WMS.Infrastructure.DependencyInjection
             services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IScanService, ScanService>();
             services.AddScoped<INotifyService, NotifyService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IReportRepository, ReportRepository>();
+
         }
     }
 }
