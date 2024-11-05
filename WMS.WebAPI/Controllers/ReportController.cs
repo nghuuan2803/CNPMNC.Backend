@@ -24,7 +24,7 @@ namespace WMS.WebAPI.Controllers
         //    return Ok();
         //}
 
-        public string CreateSignature(string name,string email, string phone, string img)
+        private string CreateSignature(string name,string email, string phone, string img)
         {
             var content = $"<p><strong>{name}</strong><br>\r\n  " +
                 $" Software Engineer<br>\r\n   Acme Corporation<br>\r\n  " +

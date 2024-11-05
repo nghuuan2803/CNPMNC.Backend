@@ -19,7 +19,7 @@ namespace WMS.Infrastructure.Repositories.Loaction
         }
         public async override Task<Warehouse> GetAsync(Expression<Func<Warehouse, bool>> predicate)
         {
-                return await _db.Warehouses.Include(p => p.Manager).SingleOrDefaultAsync(predicate);
+            return await _db.Warehouses.Include(p => p.Manager).SingleOrDefaultAsync(predicate);
         }
     }
 }
